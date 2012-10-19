@@ -1,0 +1,20 @@
+/**
+ *This work is licensed under the Creative Commons Attribuzione 3.0
+ *Unported License. To view a copy of this license, visit
+ *http://creativecommons.org/licenses/by/3.0/
+ *
+ *Please note that this is not Touchégg nor Touchégg-gui,
+ *which author is José Expósito <jose.exposito89@gmail.com>.
+ *This is a gui interface to edit Touchégg configuration file
+ *alternative to Touchégg-gui.
+ *
+ *@author Raffaele Pertile <raffarti@yahoo.it>
+ */
+ 
+Dependences:
+sudo apt-get install build-essential libqt4-dev libx11-6 libxtst-dev
+ 
+ To build use
+ qmake
+ make
+ 

@@ -48,7 +48,8 @@ FORMS    += gui.ui \
 
 OTHER_FILES += \
     default.conf \
-    README.md
+    Changelog \
+    README
 
 TRANSLATIONS = Dictionaries/it.ts \
     Dictionaries/en.ts

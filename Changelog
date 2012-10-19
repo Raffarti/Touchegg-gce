@@ -1,0 +1,9 @@
+Touchegg-gce-1.1 (17/10/1012):
+	-Added language selection at startup.
+	-Added italian language.
+
+#Bug fixes:
+	#Fixed: moving composed gesture timeout slider before a file is loaded cause crash.
+		-Composed gesture timeout slider is now disabled before a file is loaded.
+	#Fixed: missing windows names.
+	#Fixed: Scroll editing causing crash.
