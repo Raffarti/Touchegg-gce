@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = touchegg-gce
 TEMPLATE = app
 
+LIBS        += -lX11
 
 SOURCES += main.cpp\
         gui.cpp \
