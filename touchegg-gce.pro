@@ -22,7 +22,6 @@ SOURCES += main.cpp\
     keylinguist.cpp \
     scribe.cpp \
     newgroupdialog.cpp \
-    dictionary.cpp \
     langselector.cpp
 
 HEADERS  += gui.h \
@@ -37,7 +36,6 @@ HEADERS  += gui.h \
     keylinguist.h \
     scribe.h \
     newgroupdialog.h \
-    dictionary.h \
     langselector.h
 
 FORMS    += gui.ui \

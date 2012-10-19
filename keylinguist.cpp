@@ -15,6 +15,7 @@
 #include "keylinguist.h"
 #include <X11/Xlib.h>
 #include <QX11Info>
+#include <X11/XKBlib.h>
 
 ///***+++---WARNING:
 //DO NOT MOVE THOSE LIBRARIES TO HEADER FILE, nor add any Qt class include under them
@@ -27,5 +28,5 @@ KeyLinguist::KeyLinguist()
 
 
 QString KeyLinguist::toString(uint keycode){
-    return QString(XKeysymToString(XKeycodeToKeysym(QX11Info::display(),keycode,0)));
+    return QString(XKeysymToString(XkbKeycodeToKeysym(QX11Info::display(),keycode,0,0)));
 }

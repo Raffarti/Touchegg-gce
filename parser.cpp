@@ -228,7 +228,7 @@ void Parser::sSettings(){
     sProperty(key);
 }
 
-void Parser::sProperty(QString key = 0){
+void Parser::sProperty(QString key = QString::null){
     if (key != NULL){
         eat("\t\n ");
         int val = getInt();

@@ -1,3 +1,9 @@
+Touchegg-gce-1.1a (19/10/1012):
+
+[Code]:
+        -removed a deprecated function in keylinguist
+
+
 Touchegg-gce-1.1 (17/10/1012):
 	-Added language selection at startup.
 	-Added italian language.
