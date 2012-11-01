@@ -22,6 +22,9 @@
 
 int main(int argc, char *argv[])
 {
+    QDir::setCurrent(QFileInfo(QString(argv[0])).absoluteDir().absolutePath());
+    qDebug(QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ").toAscii());
+
     //Asking user for language and starting application
     QApplication a(argc, argv);
     QTranslator *t = new QTranslator();

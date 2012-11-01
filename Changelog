@@ -1,3 +1,6 @@
+Touchegg-gce-1.1a (1/11/1012):
+    -touchegg-gce can now be executed without manually set working directory.
+
 Touchegg-gce-1.1a (19/10/1012):
 
 [Code]:
