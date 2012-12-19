@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     diag->setLayout(new QHBoxLayout());
     QComboBox *chooser = new QComboBox(diag);
     QDir *dir = new QDir("Dictionaries");
-    QStringList langs = dir->entryList(QStringList("[A-Z][A-Z].qm"), QDir::Files);
+    QStringList langs = dir->entryList(QStringList("[A-Z][A-Z]*.qm"), QDir::Files);
     QStringList chopped = QStringList();
     foreach(QString s, langs){
         s.chop(3);
