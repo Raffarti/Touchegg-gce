@@ -14,7 +14,6 @@
  */
 #include "keylinguist.h"
 #include <X11/Xlib.h>
-#include <QX11Info>
 #include <X11/XKBlib.h>
 
 ///***+++---WARNING:
@@ -28,5 +27,5 @@ KeyLinguist::KeyLinguist()
 
 
 QString KeyLinguist::toString(uint keycode){
-    return QString(XKeysymToString(XkbKeycodeToKeysym(QX11Info::display(),keycode,0,0)));
+    return QString(XKeysymToString(XkbKeycodeToKeysym(XOpenDisplay(0),keycode,0,0)));
 }
