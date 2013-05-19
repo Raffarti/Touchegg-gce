@@ -131,7 +131,7 @@ void Gui::on_pushButton_3_clicked()
 {
 
     //Load button trigger
-    qDebug(filePath->toAscii());
+    qDebug(filePath->toLatin1());
     loadFile(getPath());
 }
 

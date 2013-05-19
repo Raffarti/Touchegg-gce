@@ -93,7 +93,7 @@ void SendKeys::on_keyBox_textEdited(const QString &/*arg1*/)
 
 void SendKeys::on_keyBox_keyCatched(const QString & /*text*/)
 {
-    //qDebug(text.toAscii());
+    //qDebug(text.toLatin1());
 }
 
 void SendKeys::on_pushButton_clicked()
