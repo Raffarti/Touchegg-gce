@@ -12,8 +12,8 @@
  *
  *@author Raffaele Pertile <raffarti@yahoo.it>
  */
+#include <QtGui/QApplication>
 #include "gui.h"
-#include <QApplication>
 #include <QTranslator>
 #include "langselector.h"
 #include <QComboBox>
@@ -23,7 +23,7 @@
 int main(int argc, char *argv[])
 {
     QDir::setCurrent(QFileInfo(QString(argv[0])).absoluteDir().absolutePath());
-    qDebug(QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ").toLatin1());
+    qDebug(QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ").toAscii());
 
     //Asking user for language and starting application
     QApplication a(argc, argv);

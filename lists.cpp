@@ -143,7 +143,7 @@ Lists::ActionType Lists::toAT(QString s){
         return RUN_COMMAND;
     else if (s == tr("Drag&Drop"))
         return DRAG_AND_DROP;
-    qDebug(QString("toAT: String \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("toAT: String \"").append(s).append("\" not reconized.").toAscii());
     return NO_ACTION;
 }
 
@@ -160,7 +160,7 @@ Lists::GestureType Lists::gT(QString s){
         return TAP_AND_HOLD;
     else if (s == "DOUBLE_TAP")
         return DOUBLE_TAP;
-    qDebug(QString("gT: TAG \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("gT: TAG \"").append(s).append("\" not reconized.").toAscii());
     return (GestureType)-1;
 }
 
@@ -181,7 +181,7 @@ Lists::GestureDirection Lists::toGD(QString s){
         return IN;
     else if (s == tr("Outward"))
         return OUT;
-    qDebug(QString("toGD: String \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("toGD: String \"").append(s).append("\" not reconized.").toAscii());
     return (GestureDirection)-1;
 }
 
@@ -202,7 +202,7 @@ Lists::GestureDirection Lists::gD(QString s){
         return IN;
     else if (s == "OUT")
         return (OUT);
-    qDebug(QString("gD: String \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("gD: String \"").append(s).append("\" not reconized.").toAscii());
     return (GestureDirection)-1;
 }
 
@@ -219,7 +219,7 @@ Lists::GestureType Lists::toGT(QString s){
         return TAP_AND_HOLD;
     else if (s == tr("DoubleTap"))
         return DOUBLE_TAP;
-    qDebug(QString("toGT: String \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("toGT: String \"").append(s).append("\" not reconized.").toAscii());
     return (GestureType)-1;
 }
 
@@ -252,7 +252,7 @@ Lists::ActionType Lists::aT(QString s){
         return RUN_COMMAND;
     else if (s == "DRAG_AND_DROP")
         return DRAG_AND_DROP;
-    qDebug(QString("aT: TAG \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("aT: TAG \"").append(s).append("\" not reconized.").toAscii());
     return (ActionType)-1;
 }
 
@@ -285,7 +285,7 @@ QString Lists::trnAT(QString s){
         return *toString(RUN_COMMAND);
     else if (s == "DRAG_AND_DROP")
         return *toString(DRAG_AND_DROP);
-    qDebug(QString("trnAT: TAG \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("trnAT: TAG \"").append(s).append("\" not reconized.").toAscii());
     return *toString(NO_ACTION);
 }
 
@@ -302,7 +302,7 @@ QString Lists::trnGT(QString s){
         return *toString(TAP_AND_HOLD);
     else if (s == "DOUBLE_TAP")
         return *toString(DOUBLE_TAP);
-    qDebug(QString("trnGT: TAG \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("trnGT: TAG \"").append(s).append("\" not reconized.").toAscii());
     return NULL;
 }
 
@@ -323,7 +323,7 @@ QString Lists::trnGD(QString s){
         return *toString(IN);
     else if (s == "OUT")
         return *toString(OUT);
-    qDebug(QString("trnGD: TAG \"").append(s).append("\" not reconized.").toLatin1());
+    qDebug(QString("trnGD: TAG \"").append(s).append("\" not reconized.").toAscii());
     return NULL;
 }
 

@@ -115,7 +115,7 @@ void Parser::sStart(){
         throwError();
         return;
     }
-    if (!QString(getVarName().toLatin1()).compare("touchégg"));//what about ASCII? It was too easy?
+    if (!getVarName().compare("touchégg"));//what about ASCII? It was too easy?
     else{
         throwError();
         return;
@@ -137,7 +137,7 @@ void Parser::sTouchegg(){
     eat(" \t\n");
     if (peek() == '/'){
         poll();
-        if (getVarName().toLatin1() != "touchégg"){
+        if (getVarName() != "touchégg"){
             throwError();
             return;
         }
@@ -421,7 +421,7 @@ bool Parser::loadAll(){
         else if (!state.last().compare("GESTURE")) sGesture();
         else throwError();
         if (!state.last().compare("ERROR")){
-            qDebug("Error while parsing:%d:%d\nstate:\t"+state.at(state.length()-2).toLatin1(),error.line,error.pos);
+            qDebug("Error while parsing:%d:%d\nstate:\t"+state.at(state.length()-2).toAscii(),error.line,error.pos);
             return false;
         }
     }

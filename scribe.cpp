@@ -96,10 +96,10 @@ void Scribe::save(){
     file->open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream output(file);
     output.setCodec(QTextCodec::codecForName("UTF8"));
-    output << QString::fromUtf8("<touchégg>").toLatin1()<< endl;
+    output << QString::fromUtf8("<touchégg>").toAscii()<< endl;
     output << "\t<settings>"<< endl;
     foreach(QString prop, *Memory::getProps()){
-        output << "\t\t<property name=\"" << prop.toLatin1() << "\">";
+        output << "\t\t<property name=\"" << prop.toAscii() << "\">";
         output << Memory::getProp(prop);
         output << "</property>" << endl;
     }
@@ -112,17 +112,17 @@ void Scribe::save(){
         }
         output << "\t<application name=\"" << apps << "\">" << endl;
         foreach(Gesture *ges, Memory::getGroup(group)->getGests()){
-            output << "\t\t<gesture type=\"" << Lists::printTag(ges->getType())->toLatin1() << "\" ";
+            output << "\t\t<gesture type=\"" << Lists::printTag(ges->getType())->toAscii() << "\" ";
             output << "fingers=\"" << ges->getFingers() << "\" ";
-            output << "direction=\"" << Lists::printTag(ges->getDirection())->toLatin1() << "\">" << endl;
+            output << "direction=\"" << Lists::printTag(ges->getDirection())->toAscii() << "\">" << endl;
             Action *act = ges->getAction();
-            output << "\t\t\t<action type=\"" << Lists::printTag(act->getType())->toLatin1() << "\">";
+            output << "\t\t\t<action type=\"" << Lists::printTag(act->getType())->toAscii() << "\">";
             bool first = true;
             foreach(QString par, act->getParamKeys()){
                 if (!first) output << ":";
-                output << par.toLatin1();
+                output << par.toAscii();
                 if (!act->getParamValue(par).isNull()){
-                    output << "=" << act->getParamValue(par).toLatin1();
+                    output << "=" << act->getParamValue(par).toAscii();
                 }
                 first = false;
             }
@@ -132,7 +132,7 @@ void Scribe::save(){
 
         output << "\t</application>" << endl;
     }
-    output << QString::fromUtf8("</touchégg>").toLatin1();
+    output << QString::fromUtf8("</touchégg>").toAscii();
 
     file->close();
 
