@@ -30,6 +30,13 @@ signals:
      * @param gesture
      */
     void done(Gesture *gesture = 0);
+    /**
+     * @brief done
+     *send a signal with the reference of the new gesture.
+     *If an existing gesture was edited instead, gesture will be NULL.
+     * @param gesture
+     */
+    void deleteGesture(Gesture *gesture);
 
 public:
     /**

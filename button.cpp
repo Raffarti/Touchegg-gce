@@ -73,3 +73,11 @@ void button::on_pushButton_clicked()
     gesture->destroy();
     delete this;
 }
+
+void button::on_pushButton_3_clicked()
+{
+    EditDialog *a = new EditDialog(getGesture(), this);
+    a->open();
+    a->b = this;
+    a->setUp(true);
+}

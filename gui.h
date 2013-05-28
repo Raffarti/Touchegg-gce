@@ -43,6 +43,12 @@ public slots:
      * @param gesture
      */
     void on_editDialog_done(Gesture *gesture);
+    /**
+     * @brief on_deleteGesture
+     *delete a gesture
+     * @param gesture
+     */
+    void on_deleteGesture(Gesture *gesture);
 
     /**
      * @brief inheritGestures

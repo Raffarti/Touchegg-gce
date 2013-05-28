@@ -219,6 +219,18 @@ void Gui::on_editDialog_done(Gesture *gesture){
     displayGroup();
 }
 
+void Gui::on_deleteGesture(Gesture *gesture){
+    //called on edit or new gesture complete
+    if (gesture){
+        currentGroup->removeGesture(gesture->getFingers(),
+                                             gesture->getType(),
+                                             gesture->getDirection());
+    }
+    //to make changes appears, it will reset scroll bar position, though
+    //maybe I'll add a backup for it
+    displayGroup();
+}
+
 void Gui::groupMoved(QStandardItem *item){
     if (item->parent() == NULL){
         //if parent is null, an application is to be moved to a new group

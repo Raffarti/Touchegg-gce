@@ -27,6 +27,7 @@ EditDialog::EditDialog(Gesture *gesture, QWidget *parent) :
     QObject *gui = parent;
     while(gui->objectName() != "Gui") gui = gui->parent();
     connect(this, SIGNAL(done(Gesture*)), gui, SLOT(on_editDialog_done(Gesture*)));
+    connect(this, SIGNAL(deleteGesture(Gesture *)), gui, SLOT(on_deleteGesture(Gesture*)));
 }
 EditDialog::EditDialog(QWidget *parent) :
     QDialog(parent),
@@ -67,6 +68,14 @@ void EditDialog::setUp(bool fullEditable){
         gesDirection->setEnabled(false);
         gesType->setEnabled(false);
         fingSpin->setEnabled(false);
+    }
+    else if (b != 0){
+        fingSpin->setValue(b->bLabel.fingers->text().toInt());
+        gesType->setCurrentIndex(gesType->findText(b->bLabel.gesture->text()));
+        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(b->bLabel.gesture->text())));
+        gesDirection->setCurrentIndex(gesDirection->findText(b->bLabel.direction->text()));
+        actionList->setCurrentIndex(actionList->findText(b->bLabel.action->text()));
+        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(gesType->currentText())));
     }
     else{
         gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(gesType->currentText())));
@@ -155,6 +164,7 @@ void EditDialog::on_buttonBox_rejected()
 
 void EditDialog::on_buttonBox_accepted()
 {
+    Gesture *old = gesture;
     if (fingSpin->isEnabled()){
         gesture = new Gesture(fingSpin->value(), Lists::toGT(gesType->currentText()), Lists::toGD(gesDirection->currentText()), NULL);
     }
@@ -200,6 +210,7 @@ void EditDialog::on_buttonBox_accepted()
         gesture->setAction(newAct);
         break;}
     }
+    if (b != 0) emit deleteGesture(old);
     if(fingSpin->isEnabled())emit done(gesture);
     else emit done(NULL);
     deleteLater();
