@@ -12,7 +12,7 @@
  */
  
 Dependences:
-sudo apt-get install build-essential libqt4-dev libx11-6
+sudo apt-get install build-essential libqt4-dev libx11-6 libx11-dev
  
  To build use
  qmake
