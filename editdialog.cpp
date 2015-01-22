@@ -210,7 +210,7 @@ void EditDialog::on_buttonBox_accepted()
         gesture->setAction(newAct);
         break;}
     }
-    if (b != 0) emit deleteGesture(old);
+    if(fingSpin->isEnabled() && b != 0) emit deleteGesture(old);
     if(fingSpin->isEnabled())emit done(gesture);
     else emit done(NULL);
     deleteLater();
