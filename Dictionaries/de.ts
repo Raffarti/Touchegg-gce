@@ -80,7 +80,7 @@
     <message>
         <location filename="../gui.ui" line="120"/>
         <source>Defaults</source>
-        <translation>Standartwerte</translation>
+        <translation>Standardwerte</translation>
     </message>
     <message>
         <location filename="../gui.ui" line="137"/>
