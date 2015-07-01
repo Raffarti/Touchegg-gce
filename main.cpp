@@ -12,18 +12,19 @@
  *
  *@author Raffaele Pertile <raffarti@yahoo.it>
  */
-#include <QtGui/QApplication>
 #include "gui.h"
+#include <QApplication>
 #include <QTranslator>
 #include "langselector.h"
 #include <QComboBox>
 #include <QPushButton>
+#include <QDebug>
 
 
 int main(int argc, char *argv[])
 {
     QDir::setCurrent(QFileInfo(QString(argv[0])).absoluteDir().absolutePath());
-    qDebug(QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ").toAscii());
+    qDebug() << QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ");
 
     //Asking user for language and starting application
     QApplication a(argc, argv);
@@ -47,8 +48,9 @@ int main(int argc, char *argv[])
     diag->layout()->addWidget(chooser);
     diag->layout()->addWidget(button);
     diag->exec();
-    t->load(QString("Dictionaries/").append(chopped.at(sel->value)));
-    qDebug("%d",sel->value);
+    if (sel->value != -1)
+        t->load(QString("Dictionaries/").append(chopped.at(sel->value)));
+    qDebug() << sel->value;
     a.installTranslator(t);
 
     Gui w;

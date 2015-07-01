@@ -8,13 +8,18 @@
  *This is a gui interface to edit Touchégg configuration file
  *alternative to Touchégg-gui.
  *
- *@author Raffaele Pertile <raffarti@yahoo.it>
+ *@author Raffaele Pertile <raffarti@zoho.com>
  */
  
-Dependences:
+Dependencies:
 sudo apt-get install build-essential libqt4-dev libx11-6 libx11-dev
  
- To build use
- qmake
- make
- 
+BUILD:
+
+mkdir build && cd build
+qmake ../
+make
+ln -s ../Dictionaries .
+
+NOTE:
+on some distros you may want to use qmake-qt4 or qmake-qt5 instead of qmake

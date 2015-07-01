@@ -18,6 +18,7 @@
 #include "ui_button.h"
 #include "editdialog.h"
 #include <QDir>
+#include <QDebug>
 
 Gui::Gui(QWidget *parent) :
     QMainWindow(parent),
@@ -131,7 +132,7 @@ void Gui::on_pushButton_3_clicked()
 {
 
     //Load button trigger
-    qDebug(filePath->toAscii());
+    qDebug() << filePath;
     loadFile(getPath());
 }
 

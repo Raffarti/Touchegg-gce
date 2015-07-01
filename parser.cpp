@@ -5,16 +5,17 @@
  *of this license, visit
  *http://creativecommons.org/licenses/by/3.0/
  *
- *Please note that this is not Touchégg nor Touchégg-gui,
- *which author is José Expósito <jose.exposito89@gmail.com>.
+ *Please note that this is not TouchÃ©gg nor TouchÃ©gg-gui,
+ *which author is Josï¿½ Expï¿½sito <jose.exposito89@gmail.com>.
  *This is a gui interface to edit
- *Touchégg configuration file alternative to Touchégg-gui.
+ *TouchÃ©gg configuration file alternative to TouchÃ©gg-gui.
  *
  *@author Raffaele Pertile <raffarti@yahoo.it>
  */
 #include "parser.h"
 #include "general.h"
 
+#include <QDebug>
 
 Parser::Parser(QString file){
     input = new QFile(file);
@@ -27,7 +28,7 @@ Parser::~Parser(){
 
 int Parser::init(){
     int ret = input->open(QIODevice::ReadOnly);
-    if (!ret) qDebug("Errore nell'apertura del file.");
+    if (!ret) qDebug() << "Errore nell'apertura del file.";
     in = new QTextStream(input);
     in->setCodec("UTF-8"); //out of ascii, see below-.-
     return ret;
@@ -115,8 +116,7 @@ void Parser::sStart(){
         throwError();
         return;
     }
-    if (!getVarName().compare("touchégg"));//what about ASCII? It was too easy?
-    else{
+    if (getVarName() != QString::fromUtf8("touchÃ©gg")){
         throwError();
         return;
     }
@@ -137,7 +137,7 @@ void Parser::sTouchegg(){
     eat(" \t\n");
     if (peek() == '/'){
         poll();
-        if (getVarName() != "touchégg"){
+        if (getVarName() != QString::fromUtf8("touchÃ©gg")){
             throwError();
             return;
         }
@@ -362,7 +362,7 @@ void Parser::sGesture(){
     state.append("ACTION");
     sAction(g->getGest(ges->num, Lists::gT(ges->type), Lists::gD(ges->direction))->getAction());
     if (state.endsWith(QString("E"))){
-        qDebug("E");
+        qDebug() << "E";
         return;
     }
     if (poll() != '<' || poll() != '/' || getVarName() != "action" || poll() != '>'){
@@ -410,7 +410,7 @@ bool Parser::loadAll(){
     Memory();
     while(true){
         if (!state.last().compare("EOF")){
-            qDebug("Config file loaded.");
+            qDebug() << "Config file loaded.";
             return true;
         }
         else if (!state.last().compare("START")) sStart();
@@ -421,7 +421,7 @@ bool Parser::loadAll(){
         else if (!state.last().compare("GESTURE")) sGesture();
         else throwError();
         if (!state.last().compare("ERROR")){
-            qDebug("Error while parsing:%d:%d\nstate:\t"+state.at(state.length()-2).toAscii(),error.line,error.pos);
+            qDebug() << QString("Error while parsing:%1:%2\nstate:\t"+state.at(state.length()-2)).arg(error.line).arg(error.pos);
             return false;
         }
     }

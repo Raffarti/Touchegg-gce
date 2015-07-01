@@ -5,7 +5,7 @@
 LangSelector::LangSelector(QObject *parent) :
     QObject(parent)
 {
-    value = 0;
+    value = -1;
 }
 
 void LangSelector::set(int val){

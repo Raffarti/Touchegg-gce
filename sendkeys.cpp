@@ -14,6 +14,7 @@
  */
 #include "sendkeys.h"
 #include "ui_sendkeys.h"
+//#include <QDebug>
 
 SendKeys::SendKeys(QWidget *parent) :
     QFrame(parent),
@@ -93,7 +94,7 @@ void SendKeys::on_keyBox_textEdited(const QString &/*arg1*/)
 
 void SendKeys::on_keyBox_keyCatched(const QString & /*text*/)
 {
-    //qDebug(text.toAscii());
+    //qDebug() << text;
 }
 
 void SendKeys::on_pushButton_clicked()
