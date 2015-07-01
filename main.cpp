@@ -15,44 +15,55 @@
 #include "gui.h"
 #include <QApplication>
 #include <QTranslator>
-#include "langselector.h"
 #include <QComboBox>
 #include <QPushButton>
+#include <QDir>
 #include <QDebug>
 
 
 int main(int argc, char *argv[])
 {
-    QDir::setCurrent(QFileInfo(QString(argv[0])).absoluteDir().absolutePath());
-    qDebug() << QFileInfo(QString(argv[0])).absoluteDir().absolutePath().prepend("cd ");
-
     //Asking user for language and starting application
     QApplication a(argc, argv);
     QTranslator *t = new QTranslator();
     QDialog *diag = new QDialog();
     diag->setLayout(new QHBoxLayout());
     QComboBox *chooser = new QComboBox(diag);
-    QDir *dir = new QDir("Dictionaries");
-    QStringList langs = dir->entryList(QStringList("[A-Z][A-Z]*.qm"), QDir::Files);
-    QStringList chopped = QStringList();
-    foreach(QString s, langs){
-        s.chop(3);
-        chopped.append(s);
+
+    QStringList dirs;
+    dirs << "" << DICTS_PREFIX;
+    qDebug() << dirs;
+    QFileInfoList langs;
+
+    QStringList visited_dirs;
+    foreach(QString dirName, dirs){
+        QDir dir(dirName);
+        if (!dir.exists() || visited_dirs.contains(dir.canonicalPath()))
+            continue;
+
+        visited_dirs << dir.canonicalPath();
+        dir.cd("Dictionaries");
+        langs += dir.entryInfoList(QStringList("[A-Z][A-Z]*.qm"), QDir::Files);
     }
 
-    chooser->addItems(chopped);
-    LangSelector *sel = new LangSelector();
-    diag->connect(chooser,SIGNAL(currentIndexChanged(int)),sel,SLOT(set(int)));
-    QPushButton *button = new QPushButton("Ok",diag);
-    diag->connect(button,SIGNAL(clicked()),diag,SLOT(close()));
-    diag->layout()->addWidget(chooser);
-    diag->layout()->addWidget(button);
-    diag->exec();
-    if (sel->value != -1)
-        t->load(QString("Dictionaries/").append(chopped.at(sel->value)));
-    qDebug() << sel->value;
-    a.installTranslator(t);
+    QStringList chopped = QStringList();
+    foreach(QFileInfo s, langs){
+        chopped.append(s.completeBaseName());
+    }
 
+    if (!chopped.isEmpty()){
+        chooser->addItems(chopped);
+        QPushButton *button = new QPushButton("Ok",diag);
+        diag->connect(button,SIGNAL(clicked()),diag,SLOT(close()));
+        diag->layout()->addWidget(chooser);
+        diag->layout()->addWidget(button);
+        diag->exec();
+        QFileInfo langFile = langs.at(chooser->currentIndex());//langs.at(sel->value);
+        t->load(langFile.completeBaseName(),langFile.canonicalPath());
+        a.installTranslator(t);
+
+    }
+    delete diag;
     Gui w;
     w.show();
 

@@ -14,12 +14,34 @@
 Dependencies:
 sudo apt-get install build-essential libqt4-dev libx11-6 libx11-dev
  
-BUILD:
+BUILD & INSTALLATION:
 
-mkdir build && cd build
-qmake ../
-make
-ln -s ../Dictionaries .
+
+Build and install in /usr/local (default prefix):
+
+    mkdir build && cd build
+    qmake ..
+    make && make install
+
+To install into another prefix use:
+
+    mkdir build && cd build
+    qmake PREFIX=/path/to/prefix ..
+    make && make install
 
 NOTE:
 on some distros you may want to use qmake-qt4 or qmake-qt5 instead of qmake
+
+NOTE2:
+non absolute path in PREFIX will be located in .pro's directory and NOT in current working directory, e.g.
+
+    mkdir build && cd build
+    qmake PREFIX=install ..
+    make && make install
+
+will create an 'install' directory inside your project's root (.pro location),
+to install inside your current dir use:
+
+    mkdir build && cd build
+    qmake PREFIX=$(pwd)/install ..
+    make && make install

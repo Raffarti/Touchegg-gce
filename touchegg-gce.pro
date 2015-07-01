@@ -25,8 +25,7 @@ SOURCES += main.cpp\
     keylineedit.cpp \
     keylinguist.cpp \
     scribe.cpp \
-    newgroupdialog.cpp \
-    langselector.cpp
+    newgroupdialog.cpp
 
 HEADERS  += gui.h \
     parser.h \
@@ -39,8 +38,7 @@ HEADERS  += gui.h \
     keylineedit.h \
     keylinguist.h \
     scribe.h \
-    newgroupdialog.h \
-    langselector.h
+    newgroupdialog.h
 
 FORMS    += gui.ui \
     button.ui \
@@ -53,5 +51,27 @@ OTHER_FILES += \
     Changelog \
     README
 
-TRANSLATIONS = Dictionaries/it.ts \
-    Dictionaries/en.ts
+TRANSLATIONS = Dictionaries/it_IT.ts \
+    de.ts \
+    en.ts \
+    zh_CN.ts
+
+isEmpty(PREFIX){
+    PREFIX = /usr/local
+
+    message("Installation prefix:")
+    message("   $$PREFIX")
+    message("To set a different prefix use:")
+    message("   qmake PREFIX=/install/prefix/here'")
+}else:{
+
+    message("Installation prefix:")
+    message("   $$PREFIX")
+}
+
+DEFINES += DICTS_PREFIX=\\\"$$PREFIX/share/touchegg-gce/\\\"
+
+target.path = $$PREFIX/bin
+translations.path = $$PREFIX/share/touchegg-gce/Dictionaries
+translations.files = Dictionaries/*.qm
+INSTALLS = target translations

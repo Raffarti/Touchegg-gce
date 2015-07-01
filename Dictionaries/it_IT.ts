@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT" sourcelanguage="en">
+<TS version="2.1" language="it_IT" sourcelanguage="en">
 <context>
     <name>EditDialog</name>
     <message>
@@ -29,12 +29,12 @@
         <translation>Azione:</translation>
     </message>
     <message>
-        <location filename="../editdialog.cpp" line="115"/>
+        <location filename="../editdialog.cpp" line="124"/>
         <source>Speed:</source>
         <translation>Velocitá:</translation>
     </message>
     <message>
-        <location filename="../editdialog.cpp" line="122"/>
+        <location filename="../editdialog.cpp" line="131"/>
         <source>Inverted:</source>
         <translation>Invertito:</translation>
     </message>
@@ -47,12 +47,12 @@
         <translation type="obsolete">falso</translation>
     </message>
     <message>
-        <location filename="../editdialog.cpp" line="139"/>
+        <location filename="../editdialog.cpp" line="148"/>
         <source>Command:</source>
         <translation>Comando:</translation>
     </message>
     <message>
-        <location filename="../editdialog.cpp" line="104"/>
+        <location filename="../editdialog.cpp" line="113"/>
         <source>Button:</source>
         <translation>Tasto:</translation>
     </message>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <location filename="../gui.ui" line="55"/>
-        <location filename="../gui.ui" line="196"/>
+        <location filename="../gui.ui" line="193"/>
         <source>Add</source>
         <translation>Aggiungi</translation>
     </message>
@@ -76,32 +76,32 @@
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="103"/>
+        <location filename="../gui.ui" line="100"/>
         <source>Load</source>
         <translation>Carica</translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="113"/>
+        <location filename="../gui.ui" line="110"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="120"/>
+        <location filename="../gui.ui" line="117"/>
         <source>Defaults</source>
         <translation>Predefiniti</translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="137"/>
+        <location filename="../gui.ui" line="134"/>
         <source>~/.config/touchegg/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="150"/>
+        <location filename="../gui.ui" line="147"/>
         <source>Reset path</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gui.ui" line="214"/>
+        <location filename="../gui.ui" line="211"/>
         <source>(0~1000ms)</source>
         <translation></translation>
     </message>
@@ -126,188 +126,194 @@
         <translation>Mostra avanzato</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="124"/>
+        <location filename="../gui.cpp" line="118"/>
         <source>Value: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="171"/>
+        <location filename="../gui.cpp" line="168"/>
         <source>Action:</source>
         <translation>Azione:</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="226"/>
+        <location filename="../gui.cpp" line="244"/>
         <source>New group</source>
         <translation>Creazione gruppo</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="227"/>
+        <location filename="../gui.cpp" line="245"/>
         <source>Moving an application to a new group,
 inherit old group gestures?</source>
         <translation>Si sta spostando l&apos;applicazione in un nuovo gruppo,\ncopiare i gesti del vecchio gruppo?</translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="265"/>
+        <location filename="../gui.cpp" line="331"/>
+        <source>All</source>
+        <translation type="unfinished">Qualsiasi</translation>
     </message>
 </context>
 <context>
     <name>Lists</name>
     <message>
-        <location filename="../lists.cpp" line="23"/>
-        <location filename="../lists.cpp" line="118"/>
+        <location filename="../lists.cpp" line="24"/>
+        <location filename="../lists.cpp" line="119"/>
         <source>No Action</source>
         <translation>Nessuna Azione</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="25"/>
-        <location filename="../lists.cpp" line="120"/>
+        <location filename="../lists.cpp" line="26"/>
+        <location filename="../lists.cpp" line="121"/>
         <source>Mouse Click</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="27"/>
-        <location filename="../lists.cpp" line="122"/>
+        <location filename="../lists.cpp" line="28"/>
+        <location filename="../lists.cpp" line="123"/>
         <source>Scroll</source>
         <translation>Scorrimento</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="29"/>
-        <location filename="../lists.cpp" line="124"/>
+        <location filename="../lists.cpp" line="30"/>
+        <location filename="../lists.cpp" line="125"/>
         <source>Minimize</source>
         <translation>Minimizza finestra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="31"/>
-        <location filename="../lists.cpp" line="126"/>
+        <location filename="../lists.cpp" line="32"/>
+        <location filename="../lists.cpp" line="127"/>
         <source>Maximize</source>
         <translation>Massimizza finestra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="33"/>
-        <location filename="../lists.cpp" line="128"/>
+        <location filename="../lists.cpp" line="34"/>
+        <location filename="../lists.cpp" line="129"/>
         <source>Close</source>
         <translation>Chiudi finestra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="35"/>
-        <location filename="../lists.cpp" line="130"/>
+        <location filename="../lists.cpp" line="36"/>
+        <location filename="../lists.cpp" line="131"/>
         <source>Resize</source>
         <translation>Ridimensiona finestra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="37"/>
-        <location filename="../lists.cpp" line="132"/>
+        <location filename="../lists.cpp" line="38"/>
+        <location filename="../lists.cpp" line="133"/>
         <source>Show Desktop</source>
         <translation>Mostra Desktop</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="39"/>
-        <location filename="../lists.cpp" line="134"/>
+        <location filename="../lists.cpp" line="40"/>
+        <location filename="../lists.cpp" line="135"/>
         <source>Change Desktop</source>
         <translation>Cambia Desktop</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="41"/>
-        <location filename="../lists.cpp" line="136"/>
+        <location filename="../lists.cpp" line="42"/>
+        <location filename="../lists.cpp" line="137"/>
         <source>Change Viewport</source>
         <translation>Cambia Vista</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="43"/>
-        <location filename="../lists.cpp" line="138"/>
+        <location filename="../lists.cpp" line="44"/>
+        <location filename="../lists.cpp" line="139"/>
         <source>Send Keys</source>
         <translation>Emula Tastiera</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="45"/>
-        <location filename="../lists.cpp" line="140"/>
+        <location filename="../lists.cpp" line="46"/>
+        <location filename="../lists.cpp" line="141"/>
         <source>Move Window</source>
         <translation>Sposta finestra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="47"/>
-        <location filename="../lists.cpp" line="142"/>
+        <location filename="../lists.cpp" line="48"/>
+        <location filename="../lists.cpp" line="143"/>
         <source>Run Command</source>
         <translation>Esegui comando</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="49"/>
-        <location filename="../lists.cpp" line="144"/>
+        <location filename="../lists.cpp" line="50"/>
+        <location filename="../lists.cpp" line="145"/>
         <source>Drag&amp;Drop</source>
         <translation>Trascina</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="58"/>
-        <location filename="../lists.cpp" line="207"/>
+        <location filename="../lists.cpp" line="59"/>
+        <location filename="../lists.cpp" line="211"/>
         <source>Tap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="60"/>
-        <location filename="../lists.cpp" line="209"/>
+        <location filename="../lists.cpp" line="61"/>
+        <location filename="../lists.cpp" line="213"/>
         <source>Drag</source>
         <translation>Trascina</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="62"/>
-        <location filename="../lists.cpp" line="211"/>
+        <location filename="../lists.cpp" line="63"/>
+        <location filename="../lists.cpp" line="215"/>
         <source>Pinch</source>
         <translation>Radiale</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="64"/>
-        <location filename="../lists.cpp" line="213"/>
+        <location filename="../lists.cpp" line="65"/>
+        <location filename="../lists.cpp" line="217"/>
         <source>Rotate</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="66"/>
-        <location filename="../lists.cpp" line="215"/>
+        <location filename="../lists.cpp" line="67"/>
+        <location filename="../lists.cpp" line="219"/>
         <source>Tap&amp;Hold</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="68"/>
-        <location filename="../lists.cpp" line="217"/>
+        <location filename="../lists.cpp" line="69"/>
+        <location filename="../lists.cpp" line="221"/>
         <source>DoubleTap</source>
         <translation>Doppio Tap</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="79"/>
-        <location filename="../lists.cpp" line="169"/>
+        <location filename="../lists.cpp" line="80"/>
+        <location filename="../lists.cpp" line="171"/>
         <source>All</source>
         <translation>Qualsiasi</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="81"/>
-        <location filename="../lists.cpp" line="171"/>
+        <location filename="../lists.cpp" line="82"/>
+        <location filename="../lists.cpp" line="173"/>
         <source>Up</source>
         <translation>Su</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="83"/>
-        <location filename="../lists.cpp" line="173"/>
+        <location filename="../lists.cpp" line="84"/>
+        <location filename="../lists.cpp" line="175"/>
         <source>Down</source>
         <translation>Giù</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="85"/>
-        <location filename="../lists.cpp" line="175"/>
+        <location filename="../lists.cpp" line="86"/>
+        <location filename="../lists.cpp" line="177"/>
         <source>Left</source>
         <translation>Sinistra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="87"/>
-        <location filename="../lists.cpp" line="177"/>
+        <location filename="../lists.cpp" line="88"/>
+        <location filename="../lists.cpp" line="179"/>
         <source>Right</source>
         <translation>Destra</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="89"/>
-        <location filename="../lists.cpp" line="179"/>
+        <location filename="../lists.cpp" line="90"/>
+        <location filename="../lists.cpp" line="181"/>
         <source>Inward</source>
         <translation>Interno</translation>
     </message>
     <message>
-        <location filename="../lists.cpp" line="91"/>
-        <location filename="../lists.cpp" line="181"/>
+        <location filename="../lists.cpp" line="92"/>
+        <location filename="../lists.cpp" line="183"/>
         <source>Outward</source>
         <translation>Esterno</translation>
     </message>
@@ -315,12 +321,12 @@ inherit old group gestures?</source>
 <context>
     <name>Memory</name>
     <message>
-        <location filename="../memory.cpp" line="43"/>
+        <location filename="../memory.cpp" line="44"/>
         <source>All</source>
         <translation>Qualsiasi</translation>
     </message>
     <message>
-        <location filename="../memory.cpp" line="45"/>
+        <location filename="../memory.cpp" line="46"/>
         <source>Group </source>
         <translation>Gruppo </translation>
     </message>
@@ -356,59 +362,59 @@ inherit old group gestures?</source>
 <context>
     <name>Scribe</name>
     <message>
-        <location filename="../scribe.cpp" line="32"/>
+        <location filename="../scribe.cpp" line="31"/>
         <source>File not found</source>
         <translation>File non trovato</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="33"/>
+        <location filename="../scribe.cpp" line="32"/>
         <source>Target file doesn&apos;t exists,
 make a new one?</source>
         <translation>Creare il file?</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="43"/>
+        <location filename="../scribe.cpp" line="42"/>
         <source>File path doesn&apos;t exists</source>
         <translation>Percorso inesistente</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="44"/>
+        <location filename="../scribe.cpp" line="43"/>
         <source>The folder of the file doesn&apos;t exists,
 make a new one?</source>
         <translation>La cartella non esiste,\ncrearla?</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="54"/>
+        <location filename="../scribe.cpp" line="53"/>
         <source>Cannot create folder</source>
         <translation>Impossibile creare cartella</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="55"/>
+        <location filename="../scribe.cpp" line="54"/>
         <source>Cannot create parent folder.</source>
         <translation>Impossibile creare la catella.</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="63"/>
+        <location filename="../scribe.cpp" line="62"/>
         <source>Cannot open file</source>
         <translation>Impossibile aprire il file</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="65"/>
+        <location filename="../scribe.cpp" line="64"/>
         <source>Cannot write file.</source>
         <translation>Impossibile scrivere sul file.</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="66"/>
+        <location filename="../scribe.cpp" line="65"/>
         <source>Cannot create the configuration file.</source>
         <translation>Impossibile creare il file di configurazione.</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="141"/>
+        <location filename="../scribe.cpp" line="140"/>
         <source>Saving complite</source>
         <translation>Salvataggio completato</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="142"/>
+        <location filename="../scribe.cpp" line="141"/>
         <source>Confiuration file generated.
 Restart touchegg?</source>
         <translation>File di configurazione generato.\nRiavviare touchegg?</translation>
@@ -465,36 +471,50 @@ Restart touchegg?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../button.ui" line="34"/>
+        <location filename="../button.ui" line="36"/>
         <source>Fingers:</source>
         <translation>Num dita:</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="41"/>
-        <location filename="../button.ui" line="55"/>
-        <location filename="../button.ui" line="62"/>
+        <location filename="../button.ui" line="49"/>
+        <location filename="../button.ui" line="69"/>
+        <location filename="../button.ui" line="82"/>
         <source>TextLabel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../button.ui" line="48"/>
+        <location filename="../button.ui" line="56"/>
         <source>Direction:</source>
         <translation>Direzione:</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="69"/>
+        <location filename="../button.ui" line="89"/>
         <source>Gesture:</source>
         <translation>Gesto:</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="78"/>
+        <location filename="../button.ui" line="105"/>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="88"/>
+        <location filename="../button.ui" line="118"/>
+        <source>Change gesture keeping the same action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../button.ui" line="124"/>
+        <source>Morph Gesture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../button.ui" line="131"/>
+        <source>Change Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Edit</source>
-        <translation>Modifica</translation>
+        <translation type="vanished">Modifica</translation>
     </message>
 </context>
 </TS>

@@ -1,3 +1,7 @@
+Touchegg-gce-1.2 (1/7/1015):
+    -fixed Qt4/Qt5 compatibility.
+    -added basic installation features.
+    
 Touchegg-gce-1.1a (1/11/1012):
     -touchegg-gce can now be executed without manually set working directory.
 
