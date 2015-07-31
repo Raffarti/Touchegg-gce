@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>default.conf</file>
+        <file>Dictionaries/de.qm</file>
+        <file>Dictionaries/en.qm</file>
+        <file>Dictionaries/it.qm</file>
+        <file>Dictionaries/zh_CN.qm</file>
+        <file alias="touchegg-gce.svg">icons/hicolor/scalable/apps/touchegg-gce.svg</file>
+    </qresource>
+</RCC>

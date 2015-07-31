@@ -1,18 +1,36 @@
+/**************************************************************************
+ * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * This file is part of touchegg-gce.
+ *
+ * touchegg-gce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * touchegg-gce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #ifndef GUI_H
 #define GUI_H
 
 #include <QMainWindow>
-#include <QLineEdit>
-#include <QLabel>
-#include "parser.h"
-#include <QStandardItemModel>
-#include <QGridLayout>
-#include <QSlider>
-#include <QObjectList>
-#include <QBoxLayout>
-#include "general.h"
-#include "scribe.h"
-#include "newgroupdialog.h"
+
+class Parser;
+class QStandardItem;
+class Gesture;
+class QAbstractButton;
+class QLineEdit;
+class QStandardItemModel;
+class QFrame;
+class QSlider;
+class Group;
+class QModelIndex;
 
 namespace Ui {
 class Gui;
@@ -38,17 +56,17 @@ public slots:
     void groupMoved(QStandardItem *item);
 
     /**
-     * @brief on_editDialog_done
+     * @brief editDialogFinished
      *totally override (if exists) the old gesture with the newly created
      * @param gesture
      */
-    void on_editDialog_done(Gesture *gesture);
+    void editDialogFinished(Gesture *gesture);
     /**
-     * @brief on_deleteGesture
+     * @brief gestureDeleted
      *delete a gesture
      * @param gesture
      */
-    void on_deleteGesture(Gesture *gesture);
+    void gestureDeleted(Gesture *gesture);
 
     /**
      * @brief inheritGestures
@@ -57,20 +75,34 @@ public slots:
      */
     void inheritGestures(QAbstractButton *button);
 
+    /**
+     * @brief setLanguage
+     * change the language displayed by langBox
+     * @param indx language index
+     */
+    void setLanguage(int indx);
+
+    /**
+     * @brief setLanguageList
+     * set the language lst displayed by langBox
+     * @param langs language list to be displayed
+     */
+    void setLanguageList(QStringList langs);
+
     void newGroupAccepted();
 private slots:
 
-    void on_buttonBox_accepted();
+    void buttonBoxAccepted();
 
     void on_filePath_textEdited(const QString &arg1);
 
-    void on_buttonBox_rejected();
+    void buttonBoxRejected();
 
     void on_scrollArea_destroyed();
 
     void on_checkBox_toggled(bool checked);
 
-    void on_horizontalSlider_sliderMoved(int position);
+    void horizontalSlider_sliderMoved(int position);
 
     void on_cgt_sliderMoved(int position);
 
@@ -86,9 +118,9 @@ private slots:
 
     void on_pushButton_5_clicked();
 
-    void on_pushButton_7_clicked();
+    void pushButton7Clicked();
 
-    void on_pushButton_4_clicked();
+    void pushButton4Clicked();
 
     void on_saveButton_clicked();
 
@@ -98,9 +130,28 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_langCombo_textChanged(const QString &arg1);
+    void langCombo_textChanged(const QString &arg1);
 
-    void on_langCombo_currentIndexChanged(const QString &arg1);
+    void langCombo_currentIndexChanged(const QString &arg1);
+
+    void on_langBox_currentIndexChanged(const QString &arg1);
+
+    void on_openChooser_clicked();
+    
+    void on_saveChooser_clicked();
+
+    void on_savePath_toggled(bool checked);
+
+    void on_filePath_textChanged(const QString &arg1);
+
+signals:
+
+    /**
+     * @brief languageChanged
+     * emitted by langBox changes
+     * @param lang
+     */
+    void languageChanged(QString lang);
 
 private:
 
@@ -108,7 +159,7 @@ private:
    // Dictionary *dic;
     Ui::Gui *ui;
     Parser *parser;
-    QString *filePath;
+    QString filePath;
     QLineEdit *linePath;
     QStandardItemModel *model;
     QFrame *adv;

@@ -1,17 +1,21 @@
-/**
- *This work is licensed under the
- *Creative Commons Attribuzione 3.0
- *Unported License. To view a copy
- *of this license, visit
- *http://creativecommons.org/licenses/by/3.0/
+/**************************************************************************
+ * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * This file is part of touchegg-gce.
  *
- *Please note that this is not Touchégg nor Touchégg-gui,
- *which author is José Expósito <jose.exposito89@gmail.com>.
- *This is a gui interface to edit
- *Touchégg configuration file alternative to Touchégg-gui.
+ * touchegg-gce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *@author Raffaele Pertile <raffarti@yahoo.it>
- */
+ * touchegg-gce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #include "newgroupdialog.h"
 #include "ui_newgroupdialog.h"
 
@@ -38,7 +42,7 @@ void NewGroupDialog::on_NewGroupDialog_accepted()
 {
 }
 
-void NewGroupDialog::on_buttonBox_accepted()
+void NewGroupDialog::buttonBoxAccepted()
 {
     QLineEdit *apps = findChild<QLineEdit*>();
     QComboBox *group = findChild<QComboBox*>("groupCombo");

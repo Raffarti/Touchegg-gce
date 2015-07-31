@@ -1,3 +1,11 @@
+Touchegg-gce-1.3 (31/7/1015):
+    -enhanced language management
+    -enhanced file selection
+    -added save-as button
+    -added more desktop stuff (.desktop file and icon)
+    -more installation options and flexibility
+    -added icons from themes to buttons and such
+
 Touchegg-gce-1.2 (1/7/1015):
     -fixed Qt4/Qt5 compatibility.
     -added basic installation features.

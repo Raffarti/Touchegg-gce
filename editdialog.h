@@ -1,13 +1,31 @@
+/**************************************************************************
+ * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * This file is part of touchegg-gce.
+ *
+ * touchegg-gce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * touchegg-gce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #ifndef EDITDIALOG_H
 #define EDITDIALOG_H
 
 #include <QDialog>
-#include <QComboBox>
-#include <QSpinBox>
-#include "button.h"
-#include "general.h"
-#include <QCheckBox>
-#include "sendkeys.h"
+
+class Gesture;
+class QComboBox;
+class QSpinBox;
+class QCheckBox;
+class Button;
 
 
 namespace Ui {
@@ -45,7 +63,7 @@ public:
      *load the values of an existing gesture.
      *This is NULL if is a new gesture instead.
      */
-    button *b;
+    Button *b;
     /**
      * @brief actionList
      *Allow the user to select the action for the gesture.
@@ -84,13 +102,13 @@ private slots:
     void on_actionList_currentIndexChanged(const QString &arg1);
 
     /**
-     * @brief on_buttonBox_rejected
+     * @brief buttonBoxRejected
      *Simply exit without any change to memory.
      */
     void on_buttonBox_rejected();
 
     /**
-     * @brief on_buttonBox_accepted
+     * @brief buttonBoxAccepted
      *Apply the changes to memory.
      */
     void on_buttonBox_accepted();

@@ -1,5 +1,5 @@
 /**************************************************************************
- * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * Copyright (c) 2015 Raffaele Pertile <raffarti@zoho.com>
  * This file is part of touchegg-gce.
  *
  * touchegg-gce is free software: you can redistribute it and/or modify
@@ -16,46 +16,35 @@
  * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
-#ifndef SENDKEYS_H
-#define SENDKEYS_H
+#ifndef TRANSLATORHANDLER_H
+#define TRANSLATORHANDLER_H
 
-#include <QFrame>
-#include "ui_sendkeys.h"
+#include <QObject>
+#include <QStringList>
 
-namespace Ui {
-class SendKeys;
-}
+class QTranslator;
 
-class SendKeys : public QFrame
+class TranslatorHandler : public QObject
 {
     Q_OBJECT
-    
 public:
-    explicit SendKeys(QWidget *parent = 0);
-    ~SendKeys();
+    static TranslatorHandler *instance(QString path = QString(), QString name = QString(), QObject *parent = 0);
 
-    void setKeys(QString keys);
-
-    QString getKeys();
-    
-private slots:
-    void on_keyBox_textChanged(const QString &arg1);
-
-    void on_keyBox_textEdited(const QString &arg1);
-
-    void on_keyBox_keyCatched(const QString &text);
-
-    void on_pushButton_clicked();
+    int current();
+    QStringList dicts();
 
 private:
-    Ui::SendKeys *ui;
+    explicit TranslatorHandler(QString path = QString(), QString name = QString(), QObject *parent = 0);
 
-    QCheckBox *superBox;
-    QCheckBox *ctrlBox;
-    QCheckBox *altBox;
-    QCheckBox *altGrBox;
-    QCheckBox *shiftBox;
-    QLineEdit *keyBox;
+    static TranslatorHandler *m_instance;
+    QString m_path;
+    QTranslator *m_current = nullptr;
+    QString m_lang;
+    QStringList m_dicts;
+
+signals:
+public slots:
+    void load(QString name);
 };
 
-#endif // SENDKEYS_H
+#endif // TRANSLATORHANDLER_H

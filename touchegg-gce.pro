@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     keylineedit.cpp \
     keylinguist.cpp \
     scribe.cpp \
-    newgroupdialog.cpp
+    newgroupdialog.cpp \
+    translatorhandler.cpp \
+    settings.cpp
 
 HEADERS  += gui.h \
     parser.h \
@@ -38,7 +40,9 @@ HEADERS  += gui.h \
     keylineedit.h \
     keylinguist.h \
     scribe.h \
-    newgroupdialog.h
+    newgroupdialog.h \
+    translatorhandler.h \
+    settings.h
 
 FORMS    += gui.ui \
     button.ui \
@@ -49,29 +53,74 @@ FORMS    += gui.ui \
 OTHER_FILES += \
     default.conf \
     Changelog \
-    README
+    README \
+    COPYING
 
-TRANSLATIONS = Dictionaries/it_IT.ts \
-    de.ts \
-    en.ts \
-    zh_CN.ts
+TRANSLATIONS = Dictionaries/it.ts \
+    Dictionaries/de.ts \
+    Dictionaries/en.ts \
+    Dictionaries/zh_CN.ts
 
-isEmpty(PREFIX){
-    PREFIX = /usr/local
-
-    message("Installation prefix:")
-    message("   $$PREFIX")
-    message("To set a different prefix use:")
-    message("   qmake PREFIX=/install/prefix/here'")
+!isEmpty(standalone){
+    RESOURCES += resources.qrc
 }else:{
 
-    message("Installation prefix:")
-    message("   $$PREFIX")
+    isEmpty(PREFIX){
+        PREFIX = /usr/local
+    }
+
+    isEmpty(BIN_PATH){
+        BIN_PATH = "$$PREFIX/bin"
+    }
+
+    isEmpty(SLIB_PATH){
+        SLIB_PATH = "$$PREFIX/share"
+    }
+
+    isEmpty(TLIB_PATH){
+        TLIB_PATH = "$$SLIB_PATH/touchegg-gce"
+    }
+
+    isEmpty(DICTS_PATH){
+        DICTS_PATH = "$$TLIB_PATH/Dictionaries"
+    }
+
+    isEmpty(ICONS_PATH){
+        ICONS_PATH = "$$SLIB_PATH/icons"
+    }
+
+
+    default_config.files = default.conf
+    default_config.path = $$TLIB_PATH
+
+    icons.files = $$system('find icons -type f')
+    icons.path = $$SLIB_PATH/icons
+
+    target.path = $$BIN_PATH
+    translations.path = $$PREFIX/share/touchegg-gce/Dictionaries
+    translations.files = Dictionaries/*.qm
+
+    isEmpty(CONFIG_PATH){
+        CONFIG_PATH = $$PREFIX/etc
+    }
+
+    message("Installation Directories:")
+    message("   prefix:    $$PREFIX")
+    message("   bin:       $$BIN_PATH")
+    message("   config:    $$CONFIG_PATH")
+    message("   shared:    $$SLIB_PATH")
+
+    message("See README for details.")
+
+    conf.path = $$CONFIG_PATH
+    conf.files = touchegg-gce.conf
+
+    desktop.files = touchegg-gce.desktop
+    desktop.path = $$PREFIX/share/applications
+
+    INSTALLS = target default_config translations desktop icons conf
+    INSTALLS -= $$SKIP
 }
 
-DEFINES += DICTS_PREFIX=\\\"$$PREFIX/share/touchegg-gce/\\\"
-
-target.path = $$PREFIX/bin
-translations.path = $$PREFIX/share/touchegg-gce/Dictionaries
-translations.files = Dictionaries/*.qm
-INSTALLS = target translations
+greaterThan(QT_MAJOR_VERSION, 4): CONFIG += c++11
+else: QMAKE_CXXFLAGS += -std=c++11

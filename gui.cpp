@@ -1,23 +1,40 @@
-/**
- *This work is licensed under the
- *Creative Commons Attribuzione 3.0
- *Unported License. To view a copy
- *of this license, visit
- *http://creativecommons.org/licenses/by/3.0/
+/**************************************************************************
+ * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * This file is part of touchegg-gce.
  *
- *Please note that this is not Touchégg nor Touchégg-gui,
- *which author is José Expósito <jose.exposito89@gmail.com>.
- *This is a gui interface to edit
- *Touchégg configuration file alternative to Touchégg-gui.
+ * touchegg-gce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *@author Raffaele Pertile <raffarti@yahoo.it>
- */
+ * touchegg-gce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #include "gui.h"
+#include <QLineEdit>
+#include <QLabel>
+#include <QSettings>
+#include "parser.h"
+#include <QStandardItemModel>
+#include <QGridLayout>
+#include <QSlider>
+#include <QObjectList>
+#include <QBoxLayout>
+#include "general.h"
+#include "scribe.h"
+#include "newgroupdialog.h"
 #include "ui_gui.h"
 #include "button.h"
 #include "ui_button.h"
 #include "editdialog.h"
 #include <QDir>
+#include <QFileDialog>
 #include <QDebug>
 
 Gui::Gui(QWidget *parent) :
@@ -26,7 +43,14 @@ Gui::Gui(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    filePath = new QString("~/.config/touchegg/touchegg.conf");
+    QSettings settings("touchegg-gce");
+    if (settings.contains("filePath"))
+        filePath = settings.value("filePath").toString();
+    else
+        filePath = "~/.config/touchegg/";
+
+    ui->filePath->setText(filePath);
+
     linePath = findChild<QLineEdit*>(QString("filePath"));
     QScrollArea *sarea = findChild<QScrollArea*>("scrollArea");
 
@@ -56,12 +80,9 @@ Gui::~Gui()
 }
 
 QString Gui::getPath(){
-    QString ret = *filePath;
+    QString ret = filePath;
     //parsing standard home notation
-    if (ret.startsWith(QChar('~'))){
-        ret.remove(0,1);
-        ret.prepend(QDir::homePath());
-    }
+    ret.replace(QRegExp("^~"),QDir::homePath());
     //is the path is a directory, adding touchegg.conf as file by default
     if (QDir(ret).exists()){
         if (ret.endsWith(QChar('/')))
@@ -80,8 +101,8 @@ void Gui::loadFile(QString path){
     //enable componentss requiring a memory loaded.
     findChild<QPushButton*>("pushButton")->setEnabled(true);
     findChild<QPushButton*>("pushButton_2")->setEnabled(true);
-    QPushButton *saveButton = findChild<QPushButton*>("saveButton");
-    saveButton->setEnabled(true);
+    ui->saveButton->setEnabled(true);
+    ui->saveChooser->setEnabled(true);
 
     QScrollArea *sarea = findChild<QScrollArea*>("scrollArea");
     //clear gesture list
@@ -102,7 +123,7 @@ void Gui::loadFile(QString path){
 void Gui::on_filePath_textEdited(const QString &arg1)
 {
     //update filePath on gui request
-    filePath = new QString(arg1);
+    filePath = arg1;
 }
 
 void Gui::on_checkBox_toggled(bool checked)
@@ -124,8 +145,12 @@ void Gui::on_cgt_valueChanged(int value)
 void Gui::on_pushButton_6_clicked()
 {
     //reset path button
-    linePath->setText("~/.config/touchegg/");
-    filePath = new QString("~/.config/touchegg/");
+    QSettings settings("touchegg-gce");
+    if (settings.contains("filePath") && settings.value("filePath") != filePath)
+        filePath = settings.value("filePath").toString();
+    else
+        filePath = "~/.config/touchegg/";
+    linePath->setText(filePath);
 }
 
 void Gui::on_pushButton_3_clicked()
@@ -160,7 +185,7 @@ void Gui::displayGroup(){
     //sorted based on number of fingers
     foreach(Gesture *g,currentGroup->getSortedGestures()){
         //creating gestures frames inside the scroll area
-        button *b = new button(this);
+        Button *b = new Button(this);
         b->setGesture(g);
         b->bLabel.gesture->setText(*Lists::toString(g->getType()));
         b->bLabel.fingers->setText(QString::number(g->getFingers()));
@@ -204,10 +229,10 @@ void Gui::cleanLayout(QLayout* l){
 void Gui::on_pushButton_5_clicked()
 {
     //loading provided file
-    loadFile("./default.conf");
+    loadFile("ress:default.conf");
 }
 
-void Gui::on_editDialog_done(Gesture *gesture){
+void Gui::editDialogFinished(Gesture *gesture){
     //called on edit or new gesture complete
     if (gesture){
         currentGroup->removeGesture(gesture->getFingers(),
@@ -220,7 +245,7 @@ void Gui::on_editDialog_done(Gesture *gesture){
     displayGroup();
 }
 
-void Gui::on_deleteGesture(Gesture *gesture){
+void Gui::gestureDeleted(Gesture *gesture){
     //called on edit or new gesture complete
     if (gesture){
         currentGroup->removeGesture(gesture->getFingers(),
@@ -253,29 +278,30 @@ void Gui::groupMoved(QStandardItem *item){
 
 void Gui::refreshGroupTree(){
 
-    QTreeView *tree = findChild<QTreeView*>("treeView");
+    QTreeView *tree = ui->treeView;
     if(tree->model()->hasChildren()){
         tree->model()->removeRows(0, tree->model()->rowCount());
     }
-    foreach(QString key, *Memory::getGroupsNames()){
-        QStandardItem *group = new QStandardItem(key);
-        group->setEditable(false); //no renaming! group names can't be saved, so no reason for that.
-        group->setDragEnabled(false);//groups have no reason to be moved, just expose to buggs.
-        foreach(QString part, Memory::getGroup(key)->getAppsNames()){
-            if(key != tr("All")){ //All group have no reason to own specific applications
-                QStandardItem *item = new QStandardItem(part);
-                item->setEditable(false); //well maybe someone could find it convenient to rename apps, I'll think about that another time
-                item->setDragEnabled(true); //apps can be moved
-                item->setDropEnabled(false); //apps can't own anything
-                group->appendRow(item);
+    if (Memory::getGroupsNames())
+        foreach(QString key, *Memory::getGroupsNames()){
+            QStandardItem *group = new QStandardItem(key);
+            group->setEditable(false); //no renaming! group names can't be saved, so no reason for that.
+            group->setDragEnabled(false);//groups have no reason to be moved, just expose to buggs.
+            foreach(QString part, Memory::getGroup(key)->getAppsNames()){
+                if(key != tr("All")){ //All group have no reason to own specific applications
+                    QStandardItem *item = new QStandardItem(part);
+                    item->setEditable(false); //well maybe someone could find it convenient to rename apps, I'll think about that another time
+                    item->setDragEnabled(true); //apps can be moved
+                    item->setDropEnabled(false); //apps can't own anything
+                    group->appendRow(item);
+                }
+                else group->setDropEnabled(false); //no purpose on moving apps to All, just delete them
             }
-            else group->setDropEnabled(false); //no purpose on moving apps to All, just delete them
+            model->appendRow(group);
         }
-        model->appendRow(group);
-    }
 }
 
-void Gui::on_pushButton_7_clicked()
+void Gui::pushButton7Clicked()
 {
     //Add gesture button trigger
     EditDialog *a = new EditDialog(this);
@@ -287,9 +313,9 @@ void Gui::on_pushButton_7_clicked()
     //Save button trigger
 void Gui::on_saveButton_clicked()
 {
-    Scribe *scribe = new Scribe();
-    if(scribe->open(getPath()))
-        scribe->save();
+    Scribe scribe;
+    if(scribe.open(getPath()))
+        scribe.save();
 }
 
     //Add gesture button trigger (Hell, one of those two should be in 'trash [see below]' checking it later)
@@ -306,6 +332,17 @@ void Gui::inheritGestures(QAbstractButton *button){
     if (button->text() != "&Yes")return;
     foreach(Gesture *ges, inheritGroup->getGests())
         newGroup->addGest(new Gesture(ges));
+}
+
+void Gui::setLanguage(int indx)
+{
+    ui->langBox->setCurrentIndex(indx);
+}
+
+void Gui::setLanguageList(QStringList langs)
+{
+    ui->langBox->clear();
+    ui->langBox->addItems(langs);
 }
 
     //Add group button trigger
@@ -346,28 +383,28 @@ void Gui::on_pushButton_clicked()
 
 
 //   ***TRASH*** can't figure out how to remove them without causing Qt going mad
-void Gui::on_langCombo_textChanged(const QString &/*arg1*/)
+void Gui::langCombo_textChanged(const QString &/*arg1*/)
 {
 }
 
-void Gui::on_pushButton_4_clicked()
+void Gui::pushButton4Clicked()
 {
 }
 
-void Gui::on_langCombo_currentIndexChanged(const QString &/*arg1*/)
+void Gui::langCombo_currentIndexChanged(const QString &/*arg1*/)
 {
   //  dic->setLanguage(arg1);
 }
 
-void Gui::on_horizontalSlider_sliderMoved(int /*position*/)
+void Gui::horizontalSlider_sliderMoved(int /*position*/)
 {
 }
 
-void Gui::on_buttonBox_accepted()
+void Gui::buttonBoxAccepted()
 {
 }
 
-void Gui::on_buttonBox_rejected()
+void Gui::buttonBoxRejected()
 {
 }
 
@@ -382,4 +419,53 @@ void Gui::on_cgt_sliderMoved(int /*position*/)
 
 void Gui::on_treeView_doubleClicked(const QModelIndex &/*index*/)
 {
+}
+
+
+void Gui::on_langBox_currentIndexChanged(const QString &arg1)
+{
+    if (isHidden())return;
+    //TODO
+    //emit languageChanged(arg1);
+
+    //WORKARROUND
+    QSettings conf("touchegg-gce");
+    conf.setValue("Locale/Language",arg1);
+    conf.sync();
+    if (conf.status() == QSettings::NoError)
+        QMessageBox::information(this,"Restart Required","Please restart the application to apply language selection.\nThis will be hopefuly fixed in  future releases.");
+    else
+        QMessageBox::warning(this,"Config Error",QString("Cannot write into the configuration file.\n%1").arg(conf.fileName()));
+}
+
+void Gui::on_openChooser_clicked()
+{
+    filePath = QFileDialog::getOpenFileName(this,tr("Select Configuration File"),ui->filePath->text(),tr("Configuration Files (*.conf);;All Files (*.*)"));
+    ui->filePath->setText(filePath);
+}
+
+void Gui::on_saveChooser_clicked()
+{
+    filePath = QFileDialog::getSaveFileName(this,tr("Select Configuration File"),ui->filePath->text(),tr("Configuration Files (*.conf);;All Files (*.*)"));
+    ui->filePath->setText(filePath);
+    Scribe scribe;
+    if(scribe.open(getPath()))
+        scribe.save();
+}
+
+void Gui::on_savePath_toggled(bool checked)
+{
+    QSettings settings("touchegg-gce");
+    if (checked)
+        settings.setValue("filePath",filePath);
+    else if (settings.value("filePath") == filePath)
+        settings.remove("filePath");
+}
+
+void Gui::on_filePath_textChanged(const QString &arg1)
+{
+    QSettings settings("touchegg-gce");
+    if (settings.value("filePath").toString() == arg1)
+        ui->savePath->setChecked(true);
+    else ui->savePath->setChecked(false);
 }

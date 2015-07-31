@@ -1,8 +1,4 @@
 /**
- *This work is licensed under the Creative Commons Attribuzione 3.0
- *Unported License. To view a copy of this license, visit
- *http://creativecommons.org/licenses/by/3.0/
- *
  *Please note that this is not Touchégg nor Touchégg-gui,
  *which author is José Expósito <jose.exposito89@gmail.com>.
  *This is a gui interface to edit Touchégg configuration file
@@ -13,9 +9,9 @@
  
 Dependencies:
 sudo apt-get install build-essential libqt4-dev libx11-6 libx11-dev
- 
-BUILD & INSTALLATION:
 
+_________________________________________________________________________________________________
+BUILD & INSTALLATION:
 
 Build and install in /usr/local (default prefix):
 
@@ -23,25 +19,51 @@ Build and install in /usr/local (default prefix):
     qmake ..
     make && make install
 
-To install into another prefix use:
+Build and install in user's home:
 
     mkdir build && cd build
-    qmake PREFIX=/path/to/prefix ..
+    qmake PREFIX=~/.local
     make && make install
+
+
+=================================================================================================
+ADVANCED HELP
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+_________________________________________________________________________________________________
+To customize installation directories use:
+
+    qmake VARIABLE=value
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+variables and defaults:
+    PREFIX=/usr/local
+    BIN_PATH=$$PREFIX/bin
+    CONFIG_PATH=$$PREFIX/etc
+    SLIB_PATH=$$PREFIX/share
+    ICONS_PATH=$$SLIB/icons
+    TLIB_PATH=$$SLIB_PATH/touchegg-gce
+    DICTS_PATH=$$TLIB_PATH/Dictionaries
 
 NOTE:
-on some distros you may want to use qmake-qt4 or qmake-qt5 instead of qmake
+relative paths will be refered to .pro file location.
 
-NOTE2:
-non absolute path in PREFIX will be located in .pro's directory and NOT in current working directory, e.g.
+_________________________________________________________________________________________________
+To customize installation use:
 
-    mkdir build && cd build
-    qmake PREFIX=install ..
-    make && make install
+    qmake INSTALLS="part1 part2 ..." (e.g. qmake INSTALLS="target translations")
 
-will create an 'install' directory inside your project's root (.pro location),
-to install inside your current dir use:
+or
+    qmake SKIP="part1 part2 ..." (e.g. qmake SKIP="icons desktop")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+parts list:
+    target          executable file
+    translations    translation files
+    default_config  default configuration for touchégg
+    conf            default configuration file
+    desktop         .desktop file (application shortcut)
+    icons           icons files
 
-    mkdir build && cd build
-    qmake PREFIX=$(pwd)/install ..
-    make && make install
+_________________________________________________________________________________________________
+To create an executable with compressed resources use
+    qmake standalone=y; make

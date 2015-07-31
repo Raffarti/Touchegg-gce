@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Categories=Settings
+TryExec=touchegg-gce
+Exec=touchegg-gce
+Name=Touchégg-GCE
+Comment=Configuration utility for Touchégg.
+Icon=touchegg-gce

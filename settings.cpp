@@ -1,5 +1,5 @@
 /**************************************************************************
- * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * Copyright (c) 2015 Raffaele Pertile <raffarti@zoho.com>
  * This file is part of touchegg-gce.
  *
  * touchegg-gce is free software: you can redistribute it and/or modify
@@ -16,46 +16,20 @@
  * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 
-#ifndef SENDKEYS_H
-#define SENDKEYS_H
+#include "settings.h"
 
-#include <QFrame>
-#include "ui_sendkeys.h"
+Settings *Settings::m_instance = nullptr;
 
-namespace Ui {
-class SendKeys;
+Settings *Settings::instance()
+{
+    if (!m_instance)
+        m_instance = new Settings();
+    return m_instance;
 }
 
-class SendKeys : public QFrame
+Settings::Settings() :
+    QSettings("touchegg-gce")
 {
-    Q_OBJECT
-    
-public:
-    explicit SendKeys(QWidget *parent = 0);
-    ~SendKeys();
 
-    void setKeys(QString keys);
+}
 
-    QString getKeys();
-    
-private slots:
-    void on_keyBox_textChanged(const QString &arg1);
-
-    void on_keyBox_textEdited(const QString &arg1);
-
-    void on_keyBox_keyCatched(const QString &text);
-
-    void on_pushButton_clicked();
-
-private:
-    Ui::SendKeys *ui;
-
-    QCheckBox *superBox;
-    QCheckBox *ctrlBox;
-    QCheckBox *altBox;
-    QCheckBox *altGrBox;
-    QCheckBox *shiftBox;
-    QLineEdit *keyBox;
-};
-
-#endif // SENDKEYS_H

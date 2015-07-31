@@ -1,22 +1,26 @@
-/**
- *This work is licensed under the
- *Creative Commons Attribuzione 3.0
- *Unported License. To view a copy
- *of this license, visit
- *http://creativecommons.org/licenses/by/3.0/
+/**************************************************************************
+ * Copyright (c) 2012-2015 Raffaele Pertile <raffarti@zoho.com>
+ * This file is part of touchegg-gce.
  *
- *Please note that this is not Touchégg nor Touchégg-gui,
- *which author is José Expósito <jose.exposito89@gmail.com>.
- *This is a gui interface to edit
- *Touchégg configuration file alternative to Touchégg-gui.
+ * touchegg-gce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *@author Raffaele Pertile <raffarti@yahoo.it>
- */
+ * touchegg-gce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with touchegg-gce.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
+
 #include "button.h"
 #include "ui_button.h"
 #include "editdialog.h"
 
-button::button(QWidget *parent) :
+Button::Button(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::button)
 {
@@ -27,7 +31,7 @@ button::button(QWidget *parent) :
     bLabel.layout = findChild<QGridLayout*>("optionLayout");
 }
 
-button::~button()
+Button::~Button()
 {
     delete ui;
 }
@@ -36,7 +40,7 @@ button::~button()
  * @brief on_pushButton_2_clicked
  *Create the edit dialog of a gesture
  */
-void button::on_pushButton_2_clicked()
+void Button::on_pushButton_2_clicked()
 {
     EditDialog *a = new EditDialog(getGesture(), this);
     a->open();
@@ -50,7 +54,7 @@ void button::on_pushButton_2_clicked()
  *          data struct and interface.
  * @param gesture set the gesture related to this bottom.
  */
-void button::setGesture(Gesture *gesture){
+void Button::setGesture(Gesture *gesture){
     this->gesture = gesture;
 }
 
@@ -60,7 +64,7 @@ void button::setGesture(Gesture *gesture){
  * @return the referece to the gesture
  *          related to this interface.
  */
-Gesture* button::getGesture(){
+Gesture* Button::getGesture(){
     return gesture;
 }
 
@@ -68,13 +72,13 @@ Gesture* button::getGesture(){
  * @brief on_pushButton_clicked
  *Remove the gesture
  */
-void button::on_pushButton_clicked()
+void Button::on_pushButton_clicked()
 {
     gesture->destroy();
     delete this;
 }
 
-void button::on_pushButton_3_clicked()
+void Button::on_pushButton_3_clicked()
 {
     EditDialog *a = new EditDialog(getGesture(), this);
     a->open();
