@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
+    <width>369</width>
     <height>115</height>
    </rect>
   </property>
@@ -178,6 +178,9 @@
       <widget class="QPushButton" name="pushButton">
        <property name="text">
         <string>Reset</string>
+       </property>
+       <property name="icon">
+        <iconset theme="edit-clear"/>
        </property>
       </widget>
      </item>

@@ -104,6 +104,9 @@
        <property name="text">
         <string>Remove</string>
        </property>
+       <property name="icon">
+        <iconset theme="list-remove"/>
+       </property>
       </widget>
      </item>
      <item>
@@ -123,12 +126,18 @@
        <property name="text">
         <string>Morph Gesture</string>
        </property>
+       <property name="icon">
+        <iconset theme="edit-node"/>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_2">
        <property name="text">
         <string>Change Action</string>
+       </property>
+       <property name="icon">
+        <iconset theme="document-edit"/>
        </property>
       </widget>
      </item>

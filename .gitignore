@@ -1,3 +1,5 @@
 *.pro.user*
 build*
 install*
+*.autosave
+.directory
