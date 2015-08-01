@@ -94,8 +94,16 @@ QString Gui::getPath(){
 }
 
 void Gui::loadFile(QString path){
-    parser = new Parser(path);
-    if (!parser->init()) return;
+    QFile *file = new QFile(path);
+    if (!file->exists()){
+        QMessageBox::warning(this, tr("File Error"), tr("Target file does not exists."));
+        return;
+    }
+    if (!file->open(QIODevice::ReadOnly)){
+        QMessageBox::warning(this, tr("File Error"), tr("Target file cannot be opened."));
+        return;
+    }
+    parser = new Parser(file);
     if (!parser->loadAll())return;
 
     //enable componentss requiring a memory loaded.

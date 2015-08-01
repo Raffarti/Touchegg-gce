@@ -131,41 +131,57 @@
         <translation>Mostra avanzato</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="139"/>
+        <location filename="../gui.cpp" line="99"/>
+        <location filename="../gui.cpp" line="103"/>
+        <source>File Error</source>
+        <translation>Errore File</translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="99"/>
+        <source>Target file does not exists.</source>
+        <translation>Il file non esiste.</translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="103"/>
+        <source>Target file cannot be opened.</source>
+        <translation>Il file non può essere aperto.</translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="147"/>
         <source>Value: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="193"/>
+        <location filename="../gui.cpp" line="201"/>
         <source>Action:</source>
         <translation>Azione:</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="269"/>
+        <location filename="../gui.cpp" line="277"/>
         <source>New group</source>
         <translation>Creazione gruppo</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="270"/>
+        <location filename="../gui.cpp" line="278"/>
         <source>Moving an application to a new group,
 inherit old group gestures?</source>
         <translation>Si sta spostando l&apos;applicazione in un nuovo gruppo,\ncopiare i gesti del vecchio gruppo?</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="291"/>
-        <location filename="../gui.cpp" line="368"/>
+        <location filename="../gui.cpp" line="299"/>
+        <location filename="../gui.cpp" line="376"/>
         <source>All</source>
         <translation>Qualsiasi</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="443"/>
-        <location filename="../gui.cpp" line="449"/>
+        <location filename="../gui.cpp" line="451"/>
+        <location filename="../gui.cpp" line="457"/>
         <source>Select Configuration File</source>
         <translation>Seleziona file di configurazione</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="443"/>
-        <location filename="../gui.cpp" line="449"/>
+        <location filename="../gui.cpp" line="451"/>
+        <location filename="../gui.cpp" line="457"/>
         <source>Configuration Files (*.conf);;All Files (*.*)</source>
         <translation>File di configurazione (*.conf);;Tutti i file (*.*)</translation>
     </message>
@@ -515,17 +531,17 @@ Restart touchegg?</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="118"/>
+        <location filename="../button.ui" line="121"/>
         <source>Change gesture keeping the same action.</source>
         <translation>Modifica il gesto mantenendo la stessa azione.</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="124"/>
+        <location filename="../button.ui" line="127"/>
         <source>Morph Gesture</source>
         <translation>Trasforma Gesto</translation>
     </message>
     <message>
-        <location filename="../button.ui" line="131"/>
+        <location filename="../button.ui" line="137"/>
         <source>Change Action</source>
         <translation>Cambia Azione</translation>
     </message>
