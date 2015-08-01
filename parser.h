@@ -58,7 +58,7 @@ private:
 
     QStringList state;
 
-    void throwError();
+    void throwError(const QString &err);
 
     void sStart();
 

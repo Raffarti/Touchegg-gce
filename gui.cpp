@@ -103,6 +103,7 @@ void Gui::loadFile(QString path){
         QMessageBox::warning(this, tr("File Error"), tr("Target file cannot be opened."));
         return;
     }
+    if (parser) delete parser;
     parser = new Parser(file);
     if (!parser->loadAll())return;
 

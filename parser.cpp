@@ -32,13 +32,16 @@ Parser::~Parser(){
     delete input;
 }
 
-void Parser::throwError(){
+void Parser::throwError(const QString &err){
+    error.pos = m_reader.columnNumber();
+    error.line = m_reader.lineNumber();
+    error.msg = err;
     state.append("ERROR");
 }
 
 void Parser::sStart(){
     if (m_reader.name() != QString::fromUtf8("touchégg")){
-        throwError();
+        throwError(QString::fromUtf8("Found string: %1, touchégg expected.").arg(m_reader.name().toString()));
         return;
     }
     state.append("TOUCHEGG");
@@ -50,7 +53,7 @@ void Parser::sTouchegg(){
             state.append("SETTINGS");
         } else if (m_reader.name() == "application"){
             if (!m_reader.attributes().hasAttribute("name")){
-                throwError();
+                throwError("Attribute 'name' expected.");
                 return;
             }
             appKey = m_reader.attributes().value("name").toString();
@@ -58,14 +61,18 @@ void Parser::sTouchegg(){
             state.append("APPLICATION");
         }
         else {
-            throwError();
+            throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                       .arg(m_reader.name().toString())
+                       .arg(m_reader.tokenString()));
             return;
         }
     } else if (m_reader.isEndElement() && m_reader.name() == QString::fromUtf8("touchégg")){
         state.removeLast();
         return;
     } else {
-        throwError();
+        throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                   .arg(m_reader.name().toString())
+                   .arg(m_reader.tokenString()));
         return;
     }
 }
@@ -74,21 +81,25 @@ void Parser::sSettings(){
     if (m_reader.isStartElement()){
         if (m_reader.name() == "property"){
             if (!m_reader.attributes().hasAttribute("name")){
-                throwError();
+                throwError("Attribute 'name' expected.");
                 return;
             }
             state.append("PROPERTY");
             sProperty(m_reader.attributes().value("name").toString());
         }
         else {
-            throwError();
+            throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                       .arg(m_reader.name().toString())
+                       .arg(m_reader.tokenString()));
             return;
         }
     } else if (m_reader.isEndElement() && m_reader.name() == "settings"){
         state.removeLast();
         return;
     } else {
-        throwError();
+        throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                   .arg(m_reader.name().toString())
+                   .arg(m_reader.tokenString()));
         return;
     }
 }
@@ -107,17 +118,18 @@ void Parser::sApplication(){
         if (!(attrs.hasAttribute("type") ||
               attrs.hasAttribute("fingers") ||
               attrs.hasAttribute("direction"))){
-            throwError();
+            throwError("Missing gesture attribute.");
             return;
         }
-
         ges = new gesture;
         ges->type = attrs.value("type").toString();
         ges->num = attrs.value("fingers").toString().toInt();
         ges->direction = attrs.value("direction").toString();
         state.append("GESTURE");
     } else {
-        throwError();
+        throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                   .arg(m_reader.name().toString())
+                   .arg(m_reader.tokenString()));
         return;
     }
 }
@@ -130,7 +142,7 @@ void Parser::sGesture(){
         state.append("ACTION");
         auto attrs = m_reader.attributes();
         if (!attrs.hasAttribute("type")){
-            throwError();
+            throwError("Attribute 'type' expected.");
             return;
         }
         Group *g = Memory::getGroup(appKey);
@@ -144,7 +156,9 @@ void Parser::sGesture(){
 
         state.removeLast();
     } else {
-        throwError();
+        throwError(QString("Unrecognized string \"%1\" for token \"%2\".")
+                   .arg(m_reader.name().toString())
+                   .arg(m_reader.tokenString()));
         return;
     }
 
@@ -154,25 +168,23 @@ void Parser::sGesture(){
 bool Parser::loadAll(){
     state = QStringList();
     state.append("START");
-    error.ch = 0;
-    error.line = 1;
-    error.pos = 0;
     error.msg = QString::null;
     Memory();
     while(!m_reader.atEnd()){
         m_reader.readNext();
         if (!m_reader.isStartElement() && !m_reader.isEndElement()) continue;
-        if (!state.last().compare("START")) sStart();
-        else if (!state.last().compare("TOUCHEGG")) sTouchegg();
-        else if (!state.last().compare("SETTINGS")) sSettings();
-        else if (!state.last().compare("APPLICATION")) sApplication();
-        else if (!state.last().compare("GESTURE")) sGesture();
-        else throwError();
-        if (m_reader.error() != QXmlStreamReader::NoError)
-            throwError();
-        if (!state.last().compare("ERROR")){
-            qWarning() << QString("Error while parsing:%1:%2\nstate:\t"+state.at(state.length()-2)).arg(error.line).arg(error.pos);
-            if (m_reader.error() != QXmlStreamReader::NoError) qWarning() << m_reader.errorString();
+        if (state.last() == "START") sStart();
+        else if (state.last() == "TOUCHEGG") sTouchegg();
+        else if (state.last() == "SETTINGS") sSettings();
+        else if (state.last() == "APPLICATION") sApplication();
+        else if (state.last() == "GESTURE") sGesture();
+        else throwError("Unhandled state.");
+        if (m_reader.hasError())
+            throwError("Xml stream error.");
+        if (state.last() == "ERROR"){
+            qWarning() << QString("Error while parsing at:%1:%2\nstate:\t"+state.at(state.length()-2)).arg(error.line).arg(error.pos);
+            if (m_reader.hasError()) qWarning() << m_reader.errorString();
+            else qWarning() << error.msg;
             return false;
         }
     }
