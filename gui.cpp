@@ -39,7 +39,8 @@
 
 Gui::Gui(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Gui)
+    ui(new Ui::Gui),
+    parser(nullptr)
 {
     ui->setupUi(this);
 
@@ -51,8 +52,8 @@ Gui::Gui(QWidget *parent) :
 
     ui->filePath->setText(filePath);
 
-    linePath = findChild<QLineEdit*>(QString("filePath"));
-    QScrollArea *sarea = findChild<QScrollArea*>("scrollArea");
+    linePath = ui->filePath;
+    QScrollArea *sarea = ui->scrollArea;
 
     //scroll area for gesture list
     QWidget *wsa = new QWidget();
@@ -61,9 +62,9 @@ Gui::Gui(QWidget *parent) :
     sarea->setWidget(wsa);
 
     //tree for applications
-    QTreeView *tree = findChild<QTreeView*>("treeView");
+    QTreeView *tree = ui->treeView;
     model = new QStandardItemModel(tree);
-    adv = findChild<QFrame*>("advFrame");
+    adv = ui->advFrame;
     adv->hide();
     tree->setModel(new QStandardItemModel());
     tree->setModel(model);
@@ -71,7 +72,7 @@ Gui::Gui(QWidget *parent) :
     connect(model, SIGNAL(itemChanged(QStandardItem*)),this, SLOT(groupMoved(QStandardItem* )));
 
     //composed gesture slider
-    slider = findChild<QSlider*>("cgt");
+    slider = ui->cgt;
 }
 
 Gui::~Gui()
@@ -108,12 +109,12 @@ void Gui::loadFile(QString path){
     if (!parser->loadAll())return;
 
     //enable componentss requiring a memory loaded.
-    findChild<QPushButton*>("pushButton")->setEnabled(true);
-    findChild<QPushButton*>("pushButton_2")->setEnabled(true);
+    ui->pushButton->setEnabled(true);
+    ui->pushButton_2->setEnabled(true);
     ui->saveButton->setEnabled(true);
     ui->saveChooser->setEnabled(true);
 
-    QScrollArea *sarea = findChild<QScrollArea*>("scrollArea");
+    QScrollArea *sarea = ui->scrollArea;
     //clear gesture list
     cleanLayout(sarea->widget()->layout());
     //clear tree view and add application found in data struct memory
@@ -145,7 +146,7 @@ void Gui::on_checkBox_toggled(bool checked)
 void Gui::on_cgt_valueChanged(int value)
 {
     //sync memory with gesture timer slider
-    findChild<QLabel*>("sliderValue")->setText(QString(tr("Value: ")).append(QString::number(value)).append("ms"));
+    ui->sliderValue->setText(QString(tr("Value: ")).append(QString::number(value)).append("ms"));
     Memory::removeProp("composed_gestures_time");
     Memory::addProp("composed_gestures_time",QString::number(value));
 }
@@ -176,7 +177,7 @@ void Gui::on_treeView_clicked(const QModelIndex &index)
     //display gesture list on user tree interaction
     QModelIndex i;
     i = index.parent().isValid()?index.parent():index;
-    QTreeView *tree = findChild<QTreeView*>("treeView");
+    QTreeView *tree = ui->treeView;
     tree->collapseAll();
     tree->expand(i);
     QString name = (((QStandardItemModel*)i.model())->itemFromIndex(i))->text();
@@ -187,7 +188,7 @@ void Gui::on_treeView_clicked(const QModelIndex &index)
 }
 
 void Gui::displayGroup(){
-    QScrollArea *sarea = findChild<QScrollArea*>("scrollArea");
+    QScrollArea *sarea = ui->scrollArea;
     cleanLayout(sarea->widget()->layout());
     //if no group is about to be displayed, only cleaning was required
     if (currentGroup == NULL)return;
@@ -219,7 +220,7 @@ void Gui::displayGroup(){
     }
 
     //once a group is selected, you can add gests
-    QPushButton *addGesture = findChild<QPushButton*>("addGesture");
+    QPushButton *addGesture = ui->addGesture;
     addGesture->setEnabled(true);
 }
 
@@ -230,7 +231,7 @@ void Gui::cleanLayout(QLayout* l){
         delete wItem;
     }
 
-    QPushButton *addGesture = findChild<QPushButton*>("addGesture");
+    QPushButton *addGesture = ui->addGesture;
     //no group selected, no new gests!
     addGesture->setEnabled(false);
 }
@@ -370,7 +371,7 @@ void Gui::newGroupAccepted(){
 //remove button trigger
 void Gui::on_pushButton_clicked()
 {
-    QTreeView *tree = findChild<QTreeView*>("treeView");
+    QTreeView *tree = ui->treeView;
     if (!tree->currentIndex().isValid())return;
     QModelIndex i = tree->currentIndex();
     QString name = (((QStandardItemModel*)i.model())->itemFromIndex(i))->text();
