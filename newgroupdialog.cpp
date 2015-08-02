@@ -26,10 +26,10 @@ NewGroupDialog::NewGroupDialog(QWidget *parent) :
     ui->setupUi(this);
     QComboBox *groups = findChild<QComboBox*>("groupCombo");
     groups->addItem("<No imports>");
-    groups->addItems(*Memory::getGroupsNames());
+    groups->addItems(Memory::getGroupsNames());
     QComboBox *targets = findChild<QComboBox*>("targetCombo");
     targets->addItem("<New group>");
-    targets->addItems(*Memory::getGroupsNames());
+    targets->addItems(Memory::getGroupsNames());
     targets->removeItem(targets->findText("All"));
 }
 

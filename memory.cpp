@@ -18,9 +18,9 @@
 
 #include "memory.h"
 
-QStringList* Memory::groupsList;
-QStringList* Memory::propsList;
-QStringList* Memory::appsList;
+QStringList Memory::groupsList;
+QStringList Memory::propsList;
+QStringList Memory::appsList;
 QHash<QString, App*>* Memory::appsHash;
 QHash<QString, Group*>* Memory::groupsHash;
 type_propsHash* Memory::propsHash;
@@ -30,9 +30,9 @@ int Memory::groupCounter;
 //Note: Lists are used to keep elements ordered for users, Hash->keys() would be random
 Memory::Memory(QObject *parent) : QObject(parent)
 {
-    groupsList = new QStringList();
-    propsList = new QStringList();
-    appsList = new QStringList();
+    groupsList = QStringList();
+    propsList = QStringList();
+    appsList = QStringList();
     appsHash = new QHash<QString, App*>();
     groupsHash = new QHash<QString, Group*>();
     propsHash = new QHash<QString, QString>();
@@ -48,7 +48,7 @@ QString Memory::addGroup(QString apps){
         name = tr("All");
     else
         name = QString(tr("Group ")).append(QString::number(++groupCounter));
-    groupsList->append(name);
+    groupsList.append(name);
     groupsHash->insert(name,new Group(name));
     int k = 0;
     //extracting applications from apps string
@@ -68,7 +68,7 @@ Group* Memory::getGroup(QString name){
     return groupsHash->value(name);
 }
 
-QStringList* Memory::getGroupsNames(){
+QStringList Memory::getGroupsNames(){
     return groupsList;
 }
 
@@ -77,7 +77,7 @@ QList<Group*> Memory::getGroups(){
 }
 
 void Memory::removeGroup(QString name){
-    groupsList->removeAll(name);
+    groupsList.removeAll(name);
     groupsHash->remove(name);
     foreach(App* a, *appsHash) //destroy group applications
         if (!a->getGroup()->getName().compare(name))
@@ -88,8 +88,8 @@ void Memory::removeGroup(QString name){
 //---Memory -- PROPERTY
 
 void Memory::addProp(QString name, QString value){
-    if(propsList->contains(name)) return;
-    propsList->append(name);
+    if(propsList.contains(name)) return;
+    propsList.append(name);
     propsHash->insert(name,value);
 }
 
@@ -97,12 +97,12 @@ QString Memory::getProp(QString name){
     return propsHash->value(name);
 }
 
-QStringList* Memory::getProps(){
+QStringList Memory::getProps(){
     return propsList;
 }
 
 void Memory::removeProp(QString name){
-    propsList->removeAll(name);
+    propsList.removeAll(name);
     propsHash->remove(name);
 }
 
@@ -111,19 +111,19 @@ void Memory::removeProp(QString name){
 
 
 void Memory::addApp(QString name, QString group){
-    if(appsList->contains(name)) return;
-    if (!groupsList->contains(group)){
-        groupsList->append(group);
+    if(appsList.contains(name)) return;
+    if (!groupsList.contains(group)){
+        groupsList.append(group);
         groupsHash->insert(group,new Group(group));
     }
-    appsList->append(name);
+    appsList.append(name);
     appsHash->insert(name,new App(name, getGroup(group)));
 }
 
 void Memory::addApp(QString name){
-    if(appsList->contains(name)) return;
+    if(appsList.contains(name)) return;
     addGroup(name);
-    appsList->append(name);
+    appsList.append(name);
     appsHash->insert(name,new App(getGroup(name)->getName()));
 }
 
@@ -131,7 +131,7 @@ App* Memory::getApp(QString name){
     return appsHash->value(name);
 }
 
-QStringList* Memory::getAppsNames(){
+QStringList Memory::getAppsNames(){
     return appsList;
 }
 
@@ -140,7 +140,7 @@ QList<App*> Memory::getApps(){
 }
 
 void Memory::removeApp(QString name){
-    appsList->removeAll(name);
+    appsList.removeAll(name);
     appsHash->remove(name);
 }
 
@@ -151,7 +151,7 @@ void Memory::removeApp(QString name){
 
 Group::Group(QString name){
     this->name = name;
-    gestsList = new QStringList();
+    gestsList = QStringList();
     gestsHash = new QHash<QString, Gesture*>();
 }
 
@@ -185,12 +185,12 @@ App* Group::getApp(QString name){
 }
 
 QStringList Group::getAppsNames(){
-    QStringList *ret = new QStringList();
+    QStringList ret;
     foreach(App *a, Memory::getApps()){//group have no reference to its apps, so is necessary to costruct one.
         if (a->getGroup()->getName() == name)
-            ret->append(a->getName());
+            ret.append(a->getName());
     }
-    return *ret;
+    return ret;
 }
 
 QList<App*> Group::getApps(){
@@ -207,24 +207,24 @@ QList<App*> Group::getApps(){
 
 void Group::addGest(int fingers, Lists::GestureType type, Lists::GestureDirection direction){
     Gesture *g = new Gesture(fingers, type, direction, this);
-    if(gestsList->contains(*g)){
+    if(gestsList.contains(*g)){
         qDebug("Aptempting to insert an existing gesture, skipping.");
         return;
     }
-    gestsList->append(g->toString());
+    gestsList.append(g->toString());
     gestsHash->insert(g->toString(), g);
 }
 
 void Group::addGest(Gesture *gesture){
-    if(gestsList->contains(*gesture))return;
+    if(gestsList.contains(*gesture))return;
     gesture->setGroup(this);
-    gestsList->append(*gesture);
+    gestsList.append(*gesture);
     gestsHash->insert(*gesture, gesture);
 }
 
 Gesture* Group::getGest(int fingers, Lists::GestureType type, Lists::GestureDirection direction){
     Gesture *g = new Gesture(fingers, type, direction, this);
-    if(!gestsList->contains(*g))return NULL;
+    if(!gestsList.contains(*g))return NULL;
     return gestsHash->value(*g);
 }
 
@@ -233,21 +233,21 @@ QList<Gesture*> Group::getGests(){
 }
 
 QList<Gesture*> Group::getSortedGestures(){
-    gestsList->sort();
+    gestsList.sort();
     QList<Gesture*> ret;
-    foreach (QString ges, *gestsList) {
+    foreach (QString ges, gestsList) {
         ret.append(gestsHash->value(ges));
     }return ret;
 }
 
 void Group::removeGesture(int fingers, Lists::GestureType type, Lists::GestureDirection direction){
     Gesture *g = new Gesture(fingers, type, direction, this);
-    gestsList->removeAll(*g);
+    gestsList.removeAll(*g);
     gestsHash->remove(*g);
 }
 
 void Group::removeGesture(Gesture gest){
-    gestsList->removeAll(gest);
+    gestsList.removeAll(gest);
     gestsHash->remove(gest);
 }
 
@@ -361,24 +361,24 @@ QString Gesture::toString(){
 
 Action::Action(Lists::ActionType type){
     this->type = type;
-    paramsList = new QStringList();
+    paramsList = QStringList();
     parHash = new QHash<QString,QString>();
 }
 
 Action::Action(Action *act){
     type = act->type;
-    paramsList = new QStringList(*act->paramsList);
+    paramsList = QStringList(act->paramsList);
     parHash = new QHash<QString,QString>(*act->parHash);
 }
 
 void Action::addParam(QString name){
-    if (paramsList->contains(name))return;
-    paramsList->append(name);
+    if (paramsList.contains(name))return;
+    paramsList.append(name);
 }
 
 void Action::addParam(QString name, QString value){
-    if (paramsList->contains(name))return;
-    paramsList->append(name);
+    if (paramsList.contains(name))return;
+    paramsList.append(name);
     parHash->insert(name, value);
 }
 
@@ -387,7 +387,7 @@ Lists::ActionType Action::getType(){
 }
 
 QStringList Action::getParamKeys(){
-    return *paramsList;
+    return paramsList;
 }
 
 QString Action::getParamValue(QString key){
@@ -395,7 +395,7 @@ QString Action::getParamValue(QString key){
 }
 
 void Action::removeParam(QString name){
-    paramsList->removeAll(name);
+    paramsList.removeAll(name);
     parHash->remove(name);
 }
 

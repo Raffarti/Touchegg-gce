@@ -65,15 +65,15 @@ public:
 
     explicit Lists(QObject *parent = 0);
 
-    static QStringList* actionList();
-    static QStringList* gestureTypes();
-    static QStringList* gestureDirections(GestureType type);
-    static QString* toString(GestureType t);
-    static QString* toString(GestureDirection t);
-    static QString* toString(ActionType t);
-    static QString* printTag(GestureType t);
-    static QString* printTag(GestureDirection t);
-    static QString* printTag(ActionType t);
+    static QStringList actionList();
+    static QStringList gestureTypes();
+    static QStringList gestureDirections(GestureType type);
+    static QString toString(GestureType t);
+    static QString toString(GestureDirection t);
+    static QString toString(ActionType t);
+    static QString printTag(GestureType t);
+    static QString printTag(GestureDirection t);
+    static QString printTag(ActionType t);
     static ActionType toAT(QString s);
     static GestureType toGT(QString s);
     static GestureDirection toGD(QString s);

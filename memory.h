@@ -38,25 +38,25 @@ public:
 
     static QString addGroup(QString apps);
     static Group* getGroup(QString name);
-    static QStringList* getGroupsNames();
+    static QStringList getGroupsNames();
     static QList<Group*> getGroups();
     static void removeGroup(QString name);
 
     static void addProp(QString name, QString value);
     static QString getProp(QString name);
-    static QStringList* getProps();
+    static QStringList getProps();
     static void removeProp(QString name);
 
     static void addApp(QString name, QString group);
     static void addApp(QString name);
     static App* getApp(QString name);
-    static QStringList* getAppsNames();
+    static QStringList getAppsNames();
     static QList<App*> getApps();
     static void removeApp(QString name);
 private:
-    static QStringList *groupsList;
-    static QStringList *propsList;
-    static QStringList *appsList;
+    static QStringList groupsList;
+    static QStringList propsList;
+    static QStringList appsList;
     static QHash<QString, App*> *appsHash;
     static QHash<QString, Group*> *groupsHash;
     static type_propsHash *propsHash;
@@ -86,7 +86,7 @@ public:
 
 private:
     QString name;
-    QStringList *gestsList;
+    QStringList gestsList;
     QHash<QString, Gesture*> *gestsHash;
 };
 
@@ -148,7 +148,7 @@ public:
 
 private:
     Lists::ActionType type;
-    QStringList *paramsList;
+    QStringList paramsList;
     type_paramsHash *parHash;
 };
 

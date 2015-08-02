@@ -22,100 +22,100 @@ Lists::Lists(QObject *parent) :
     QObject(parent){}
 
 //this class is an extremly boring one, just don't look at it.
-QString* Lists::toString(ActionType t){
+QString Lists::toString(ActionType t){
     switch(t){
     case (NO_ACTION):
-        return new QString(tr("No Action"));
+        return QString(tr("No Action"));
     case (MOUSE_CLICK):
-        return new QString(tr("Mouse Click"));
+        return QString(tr("Mouse Click"));
     case (SCROLL):
-        return new QString(tr("Scroll"));
+        return QString(tr("Scroll"));
     case (MINIMIZE_WINDOW):
-        return new QString(tr("Minimize"));
+        return QString(tr("Minimize"));
     case (MAXIMIZE_RESTORE_WINDOW):
-        return new QString(tr("Maximize"));
+        return QString(tr("Maximize"));
     case (CLOSE_WINDOW):
-        return new QString(tr("Close"));
+        return QString(tr("Close"));
     case (RESIZE_WINDOW):
-        return new QString(tr("Resize"));
+        return QString(tr("Resize"));
     case (SHOW_DESKTOP):
-        return new QString(tr("Show Desktop"));
+        return QString(tr("Show Desktop"));
     case (CHANGE_DESKTOP):
-        return new QString(tr("Change Desktop"));
+        return QString(tr("Change Desktop"));
     case (CHANGE_VIEWPORT):
-        return new QString(tr("Change Viewport"));
+        return QString(tr("Change Viewport"));
     case (SEND_KEYS):
-        return new QString(tr("Send Keys"));
+        return QString(tr("Send Keys"));
     case (MOVE_WINDOW):
-        return new QString(tr("Move Window"));
+        return QString(tr("Move Window"));
     case (RUN_COMMAND):
-        return new QString(tr("Run Command"));
+        return QString(tr("Run Command"));
     case (DRAG_AND_DROP):
-        return new QString(tr("Drag&Drop"));
+        return QString(tr("Drag&Drop"));
     }
-    return NULL;
+    return QString::null;
 }
 
 
-QString* Lists::toString(GestureType t){
+QString Lists::toString(GestureType t){
     switch(t){
     case (TAP):
-        return new QString(tr("Tap"));
+        return QString(tr("Tap"));
     case (DRAG):
-        return new QString(tr("Drag"));
+        return QString(tr("Drag"));
     case (PINCH):
-        return new QString(tr("Pinch"));
+        return QString(tr("Pinch"));
     case (ROTATE):
-        return new QString(tr("Rotate"));
+        return QString(tr("Rotate"));
     case (TAP_AND_HOLD):
-        return new QString(tr("Tap&Hold"));
+        return QString(tr("Tap&Hold"));
     case (DOUBLE_TAP):
-        return new QString(tr("DoubleTap"));
+        return QString(tr("DoubleTap"));
     }
-    return NULL;
+    return QString::null;
 }
 
 
-QString* Lists::toString(GestureDirection t){
+QString Lists::toString(GestureDirection t){
     switch(t){
     case (NO_DIRECTION):
-        return new QString("");
+        return QString("");
     case (ALL):
-        return new QString(tr("All"));
+        return QString(tr("All"));
     case (UP):
-        return new QString(tr("Up"));
+        return QString(tr("Up"));
     case (DOWN):
-        return new QString(tr("Down"));
+        return QString(tr("Down"));
     case (LEFT):
-        return new QString(tr("Left"));
+        return QString(tr("Left"));
     case (RIGHT):
-        return new QString(tr("Right"));
+        return QString(tr("Right"));
     case (IN):
-        return new QString(tr("Inward"));
+        return QString(tr("Inward"));
     case (OUT):
-        return new QString(tr("Outward"));
+        return QString(tr("Outward"));
     }
-    return NULL;
+    return QString::null;
 }
 
-QStringList* Lists::actionList(){
-    QStringList *ret = new QStringList();
-    for (int i = 0; toString((ActionType)i);i++)
-        ret->append(*toString((ActionType)i));
+QStringList Lists::actionList(){
+    QStringList ret;
+    for (int i = 0; !toString((ActionType)i).isNull();i++)
+        ret.append(toString((ActionType)i));
     return ret;
 }
 
-QStringList* Lists::gestureTypes(){
-    QStringList *ret = new QStringList();
-    for (int i = 0; toString((GestureType)i);i++)
-        ret->append(*toString((GestureType)i));
+QStringList Lists::gestureTypes(){
+    QStringList ret;
+    for (int i = 0; !toString((GestureType)i).isNull();i++)
+        ret.append(toString((GestureType)i));
     return ret;
 }
 
-QStringList* Lists::gestureDirections(GestureType type){
-    QStringList *ret = new QStringList();
-    for (int i = 0; toString((GestureDirection)i);i++)
-        if(got(type,(GestureDirection)i))ret->append(*toString((GestureDirection)i));
+QStringList Lists::gestureDirections(GestureType type){
+    QStringList ret;
+    for (int i = 0; !toString((GestureDirection)i).isNull();i++)
+        if(got(type,(GestureDirection)i))ret.append(toString((GestureDirection)i));
     return ret;
 }
 
@@ -263,73 +263,73 @@ Lists::ActionType Lists::aT(QString s){
 
 QString Lists::trnAT(QString s){
     if (s == "NO_ACTION")
-        return *toString(NO_ACTION);
+        return toString(NO_ACTION);
     else if (s == "MOUSE_CLICK")
-        return *toString(MOUSE_CLICK);
+        return toString(MOUSE_CLICK);
     else if (s == "SCROLL")
-        return *toString(SCROLL);
+        return toString(SCROLL);
     else if (s == "MINIMIZE_WINDOW")
-        return *toString(MINIMIZE_WINDOW);
+        return toString(MINIMIZE_WINDOW);
     else if (s == "MAXIMIZE_RESTORE_WINDOW")
-        return *toString(MAXIMIZE_RESTORE_WINDOW);
+        return toString(MAXIMIZE_RESTORE_WINDOW);
     else if (s == "CLOSE_WINDOW")
-        return *toString(CLOSE_WINDOW);
+        return toString(CLOSE_WINDOW);
     else if (s == "RESIZE_WINDOW")
-        return *toString(RESIZE_WINDOW);
+        return toString(RESIZE_WINDOW);
     else if (s == "SHOW_DESKTOP")
-        return *toString(SHOW_DESKTOP);
+        return toString(SHOW_DESKTOP);
     else if (s == "CHANGE_DESKTOP")
-        return *toString(CHANGE_DESKTOP);
+        return toString(CHANGE_DESKTOP);
     else if (s == "CHANGE_VIEWPORT")
-        return *toString(CHANGE_VIEWPORT);
+        return toString(CHANGE_VIEWPORT);
     else if (s == "SEND_KEYS")
-        return *toString(SEND_KEYS);
+        return toString(SEND_KEYS);
     else if (s == "MOVE_WINDOW")
-        return *toString(MOVE_WINDOW);
+        return toString(MOVE_WINDOW);
     else if (s == "RUN_COMMAND")
-        return *toString(RUN_COMMAND);
+        return toString(RUN_COMMAND);
     else if (s == "DRAG_AND_DROP")
-        return *toString(DRAG_AND_DROP);
+        return toString(DRAG_AND_DROP);
     qDebug() << QString("trnAT: TAG \"%1\" not reconized.").arg(s);
-    return *toString(NO_ACTION);
+    return toString(NO_ACTION);
 }
 
 QString Lists::trnGT(QString s){
     if (s == "TAP")
-        return *toString(TAP);
+        return toString(TAP);
     else if (s == "DRAG")
-        return *toString(DRAG);
+        return toString(DRAG);
     else if (s == "PINCH")
-        return *toString(PINCH);
+        return toString(PINCH);
     else if (s == "ROTATE")
-        return *toString(ROTATE);
+        return toString(ROTATE);
     else if (s == "TAP_AND_HOLD")
-        return *toString(TAP_AND_HOLD);
+        return toString(TAP_AND_HOLD);
     else if (s == "DOUBLE_TAP")
-        return *toString(DOUBLE_TAP);
+        return toString(DOUBLE_TAP);
     qDebug() << QString("trnGT: TAG \"%1\" not reconized.").arg(s);
-    return NULL;
+    return QString::null;
 }
 
 QString Lists::trnGD(QString s){
     if (s == "")
-        return *toString(NO_DIRECTION);
+        return toString(NO_DIRECTION);
     else if (s == "ALL")
-        return *toString(ALL);
+        return toString(ALL);
     else if (s == "DOWN")
-        return *toString(DOWN);
+        return toString(DOWN);
     else if (s == "UP")
-        return *toString(UP);
+        return toString(UP);
     else if (s == "LEFT")
-        return *toString(LEFT);
+        return toString(LEFT);
     else if (s == "RIGHT")
-        return *toString(RIGHT);
+        return toString(RIGHT);
     else if (s == "IN")
-        return *toString(IN);
+        return toString(IN);
     else if (s == "OUT")
-        return *toString(OUT);
+        return toString(OUT);
     qDebug() << QString("trnGD: TAG \"%1\" not reconized.").arg(s);
-    return NULL;
+    return QString::null;
 }
 
 bool Lists::got(GestureType type, GestureDirection dir){
@@ -346,78 +346,78 @@ bool Lists::got(GestureType type, GestureDirection dir){
 }
 
 
-QString* Lists::printTag(ActionType t){
+QString Lists::printTag(ActionType t){
     switch(t){
     case (NO_ACTION):
-        return new QString("NO_ACTION");
+        return QString("NO_ACTION");
     case (MOUSE_CLICK):
-        return new QString("MOUSE_CLICK");
+        return QString("MOUSE_CLICK");
     case (SCROLL):
-        return new QString("SCROLL");
+        return QString("SCROLL");
     case (MINIMIZE_WINDOW):
-        return new QString("MINIMIZE_WINDOW");
+        return QString("MINIMIZE_WINDOW");
     case (MAXIMIZE_RESTORE_WINDOW):
-        return new QString("MAXIMIZE_RESTORE_WINDOW");
+        return QString("MAXIMIZE_RESTORE_WINDOW");
     case (CLOSE_WINDOW):
-        return new QString("CLOSE_WINDOW");
+        return QString("CLOSE_WINDOW");
     case (RESIZE_WINDOW):
-        return new QString("RESIZE_WINDOW");
+        return QString("RESIZE_WINDOW");
     case (SHOW_DESKTOP):
-        return new QString("SHOW_DESKTOP");
+        return QString("SHOW_DESKTOP");
     case (CHANGE_DESKTOP):
-        return new QString("CHANGE_DESKTOP");
+        return QString("CHANGE_DESKTOP");
     case (CHANGE_VIEWPORT):
-        return new QString("CHANGE_VIEWPORT");
+        return QString("CHANGE_VIEWPORT");
     case (SEND_KEYS):
-        return new QString("SEND_KEYS");
+        return QString("SEND_KEYS");
     case (MOVE_WINDOW):
-        return new QString("MOVE_WINDOW");
+        return QString("MOVE_WINDOW");
     case (RUN_COMMAND):
-        return new QString("RUN_COMMAND");
+        return QString("RUN_COMMAND");
     case (DRAG_AND_DROP):
-        return new QString("DRAG_AND_DROP");
+        return QString("DRAG_AND_DROP");
     }
-    return NULL;
+    return QString::null;
 }
 
 
-QString* Lists::printTag(GestureType t){
+QString Lists::printTag(GestureType t){
     switch(t){
     case (TAP):
-        return new QString("TAP");
+        return QString("TAP");
     case (DRAG):
-        return new QString("DRAG");
+        return QString("DRAG");
     case (PINCH):
-        return new QString("PINCH");
+        return QString("PINCH");
     case (ROTATE):
-        return new QString("ROTATE");
+        return QString("ROTATE");
     case (TAP_AND_HOLD):
-        return new QString("TAP_AND_HOLD");
+        return QString("TAP_AND_HOLD");
     case (DOUBLE_TAP):
-        return new QString("DOUBLE_TAP");
+        return QString("DOUBLE_TAP");
     }
-    return NULL;
+    return QString::null;
 }
 
 
-QString* Lists::printTag(GestureDirection t){
+QString Lists::printTag(GestureDirection t){
     switch(t){
     case (NO_DIRECTION):
-        return new QString("");
+        return QString("");
     case (ALL):
-        return new QString("ALL");
+        return QString("ALL");
     case (UP):
-        return new QString("UP");
+        return QString("UP");
     case (DOWN):
-        return new QString("DOWN");
+        return QString("DOWN");
     case (LEFT):
-        return new QString("LEFT");
+        return QString("LEFT");
     case (RIGHT):
-        return new QString("RIGHT");
+        return QString("RIGHT");
     case (IN):
-        return new QString("IN");
+        return QString("IN");
     case (OUT):
-        return new QString("OUT");
+        return QString("OUT");
     }
-    return NULL;
+    return QString::null;
 }

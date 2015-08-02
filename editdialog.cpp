@@ -64,14 +64,14 @@ void EditDialog::setUp(bool fullEditable){
     gesType = findChild<QComboBox *>("gesture");
     gesDirection = findChild<QComboBox *>("direction");
     actionList = findChild<QComboBox*>("actionList");
-    actionList->addItems(*Lists::actionList());
-    gesType->addItems(*Lists::gestureTypes());
+    actionList->addItems(Lists::actionList());
+    gesType->addItems(Lists::gestureTypes());
     fingSpin->setMaximum(5);
     fingSpin->setMinimum(1);
     if (!fullEditable){
         fingSpin->setValue(b->bLabel.fingers->text().toInt());
         gesType->setCurrentIndex(gesType->findText(b->bLabel.gesture->text()));
-        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(b->bLabel.gesture->text())));
+        gesDirection->addItems(Lists::gestureDirections(Lists::toGT(b->bLabel.gesture->text())));
         gesDirection->setCurrentIndex(gesDirection->findText(b->bLabel.direction->text()));
         actionList->setCurrentIndex(actionList->findText(b->bLabel.action->text()));
         gesDirection->setEnabled(false);
@@ -81,13 +81,13 @@ void EditDialog::setUp(bool fullEditable){
     else if (b != 0){
         fingSpin->setValue(b->bLabel.fingers->text().toInt());
         gesType->setCurrentIndex(gesType->findText(b->bLabel.gesture->text()));
-        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(b->bLabel.gesture->text())));
+        gesDirection->addItems(Lists::gestureDirections(Lists::toGT(b->bLabel.gesture->text())));
         gesDirection->setCurrentIndex(gesDirection->findText(b->bLabel.direction->text()));
         actionList->setCurrentIndex(actionList->findText(b->bLabel.action->text()));
-        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(gesType->currentText())));
+        gesDirection->addItems(Lists::gestureDirections(Lists::toGT(gesType->currentText())));
     }
     else{
-        gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(gesType->currentText())));
+        gesDirection->addItems(Lists::gestureDirections(Lists::toGT(gesType->currentText())));
     }
 }
 
@@ -229,5 +229,5 @@ void EditDialog::on_buttonBox_accepted()
 void EditDialog::on_gesture_currentIndexChanged(const QString &arg1)
 {
     gesDirection->clear();
-    gesDirection->addItems(*Lists::gestureDirections(Lists::toGT(arg1)));
+    gesDirection->addItems(Lists::gestureDirections(Lists::toGT(arg1)));
 }

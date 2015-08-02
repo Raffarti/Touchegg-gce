@@ -120,7 +120,7 @@ void Gui::loadFile(QString path){
     //clear tree view and add application found in data struct memory
     refreshGroupTree();
     //setting props (only gesture time present atm)
-    foreach(QString key, *Memory::getProps()){
+    foreach(QString key, Memory::getProps()){
         if (key == "composed_gestures_time"){
             slider->setEnabled(true);
             slider->setValue(Memory::getProp(key).toInt());
@@ -197,11 +197,11 @@ void Gui::displayGroup(){
         //creating gestures frames inside the scroll area
         Button *b = new Button(this);
         b->setGesture(g);
-        b->bLabel.gesture->setText(*Lists::toString(g->getType()));
+        b->bLabel.gesture->setText(Lists::toString(g->getType()));
         b->bLabel.fingers->setText(QString::number(g->getFingers()));
-        b->bLabel.direction->setText(*Lists::toString(g->getDirection()));
+        b->bLabel.direction->setText(Lists::toString(g->getDirection()));
         b->bLabel.layout->addWidget(new QLabel(tr("Action:")),0,0);
-        b->bLabel.action = new QLabel(*Lists::toString(g->getAction()->getType()));
+        b->bLabel.action = new QLabel(Lists::toString(g->getAction()->getType()));
         b->bLabel.layout->addWidget(b->bLabel.action,0,1);
         int count = 1;
         foreach(QString s, g->getAction()->getParamKeys()){
@@ -292,8 +292,8 @@ void Gui::refreshGroupTree(){
     if(tree->model()->hasChildren()){
         tree->model()->removeRows(0, tree->model()->rowCount());
     }
-    if (Memory::getGroupsNames())
-        foreach(QString key, *Memory::getGroupsNames()){
+    if (!Memory::getGroupsNames().isEmpty())
+        foreach(QString key, Memory::getGroupsNames()){
             QStandardItem *group = new QStandardItem(key);
             group->setEditable(false); //no renaming! group names can't be saved, so no reason for that.
             group->setDragEnabled(false);//groups have no reason to be moved, just expose to buggs.
@@ -375,7 +375,7 @@ void Gui::on_pushButton_clicked()
     if (!tree->currentIndex().isValid())return;
     QModelIndex i = tree->currentIndex();
     QString name = (((QStandardItemModel*)i.model())->itemFromIndex(i))->text();
-    if (Memory::getAppsNames()->contains(name) && name != tr("All"))
+    if (Memory::getAppsNames().contains(name) && name != tr("All"))
         //that's for app remove
         Memory::removeApp(name);
     else{

@@ -102,13 +102,13 @@ void Scribe::save(){
     output.setCodec(QTextCodec::codecForName("UTF8"));
     output << QString::fromUtf8("<touchégg>") << endl;
     output << "\t<settings>"<< endl;
-    foreach(QString prop, *Memory::getProps()){
+    foreach(QString prop, Memory::getProps()){
         output << "\t\t<property name=\"" << prop << "\">";
         output << Memory::getProp(prop);
         output << "</property>" << endl;
     }
     output << "\t</settings>" << endl;
-    foreach(QString group, *Memory::getGroupsNames()){
+    foreach(QString group, Memory::getGroupsNames()){
         QString apps = QString("");
         foreach(QString n, Memory::getGroup(group)->getAppsNames()){
             if (!apps.isEmpty()) apps.append(", ");
@@ -116,11 +116,11 @@ void Scribe::save(){
         }
         output << "\t<application name=\"" << apps << "\">" << endl;
         foreach(Gesture *ges, Memory::getGroup(group)->getGests()){
-            output << "\t\t<gesture type=\"" << *Lists::printTag(ges->getType()) << "\" ";
+            output << "\t\t<gesture type=\"" << Lists::printTag(ges->getType()) << "\" ";
             output << "fingers=\"" << ges->getFingers() << "\" ";
-            output << "direction=\"" << *Lists::printTag(ges->getDirection()) << "\">" << endl;
+            output << "direction=\"" << Lists::printTag(ges->getDirection()) << "\">" << endl;
             Action *act = ges->getAction();
-            output << "\t\t\t<action type=\"" << *Lists::printTag(act->getType()) << "\">";
+            output << "\t\t\t<action type=\"" << Lists::printTag(act->getType()) << "\">";
             bool first = true;
             foreach(QString par, act->getParamKeys()){
                 if (!first) output << ":";
