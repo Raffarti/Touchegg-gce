@@ -22,12 +22,13 @@
 #include <QTextCodec>
 #include <QTextStream>
 #include <QIODevice>
+#include <QDebug>
 
 Scribe::Scribe(QObject *parent) :
     QObject(parent)
 {
 }
-
+/*
 bool Scribe::open(QString name, int flag){
     file = new QFile(name);
     if (!file->exists() && flag < 1){
@@ -73,9 +74,32 @@ bool Scribe::open(QString name, int flag){
         }
     }
     return true;
+}*/
+bool Scribe::open(const QString &path){
+    QFileInfo info(path);
+    if (!info.exists()){
+        if (!info.dir().exists()){
+            auto result = QMessageBox::question(0,"File error","File path does not exists, create it?",QMessageBox::Ok|QMessageBox::Cancel);
+            if (result != QMessageBox::Ok)
+                return false;
+            if (!info.dir().mkpath(info.canonicalPath())){
+                QMessageBox::critical(0,"File error","Cannot create file path.");
+                return false;
+            }
+        } else {
+            auto result = QMessageBox::question(0,"File does not exists","File does not exists, create a new one?",QMessageBox::Ok|QMessageBox::Cancel);
+            if (result != QMessageBox::Ok)
+                return false;
+        }
+    }
+    file = new QFile(path);
+    if (!file->open(QIODevice::WriteOnly | QIODevice::Text)){
+        QMessageBox::critical(0,"File error","Cannote write configuration file, check permissions.");
+        return false;
+    }
+    return true;
 }
-
-
+/*
 void Scribe::creationConfirmed(QAbstractButton *button){
     if (button->text() == "&Yes"){
         open(file->fileName(), 1);
@@ -87,7 +111,7 @@ void Scribe::folderCreationConfirmed(QAbstractButton *button){
     if (button->text() == "&Yes"){
         open(file->fileName(), 2);
     }
-}
+}*/
 
 void Scribe::restartTouchegg(QAbstractButton *button){
     if (button->text() == "&Yes"){
@@ -97,7 +121,7 @@ void Scribe::restartTouchegg(QAbstractButton *button){
 }
 
 void Scribe::save(){
-    file->open(QIODevice::WriteOnly | QIODevice::Text);
+    //file->open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream output(file);
     output.setCodec(QTextCodec::codecForName("UTF8"));
     output << QString::fromUtf8("<touchégg>") << endl;

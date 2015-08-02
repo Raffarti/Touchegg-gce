@@ -30,13 +30,13 @@ class Scribe : public QObject
     Q_OBJECT
 public:
     explicit Scribe(QObject *parent = 0);
-    bool open(QString name, int flag = 0);
+    bool open(const QString &path);
     void save();
 private:
     QFile *file;
 public slots:
-    void creationConfirmed(QAbstractButton *button);
-    void folderCreationConfirmed(QAbstractButton *button);
+   // void creationConfirmed(QAbstractButton *button);
+   // void folderCreationConfirmed(QAbstractButton *button);
     void restartTouchegg(QAbstractButton *button);
 };
 

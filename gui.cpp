@@ -85,12 +85,11 @@ QString Gui::getPath(){
     //parsing standard home notation
     ret.replace(QRegExp("^~"),QDir::homePath());
     //is the path is a directory, adding touchegg.conf as file by default
-    if (QDir(ret).exists()){
-        if (ret.endsWith(QChar('/')))
-            ret.append(QString("touchegg.conf"));
-        else
-            ret.append(QString("/touchegg.conf"));
+    if (QFileInfo(ret).isDir()){
+        ret = QFileInfo(ret).canonicalPath().append(QString("/touchegg.conf"));
     }
+    if (ret.endsWith("/"))
+        ret.append(QString("/touchegg.conf"));
     return ret;
 }
 
@@ -456,7 +455,9 @@ void Gui::on_openChooser_clicked()
 
 void Gui::on_saveChooser_clicked()
 {
-    filePath = QFileDialog::getSaveFileName(this,tr("Select Configuration File"),ui->filePath->text(),tr("Configuration Files (*.conf);;All Files (*.*)"));
+    QString ret = QFileDialog::getSaveFileName(this,tr("Select Configuration File"),filePath,tr("Configuration Files (*.conf);;All Files (*.*)"));
+    if (ret.isNull()) return;
+    filePath = ret;
     ui->filePath->setText(filePath);
     Scribe scribe;
     if(scribe.open(getPath()))
