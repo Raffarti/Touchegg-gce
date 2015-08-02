@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT" sourcelanguage="en">
+<TS version="2.0" language="it_IT" sourcelanguage="en">
 <context>
     <name>EditDialog</name>
     <message>
@@ -406,41 +406,41 @@ inherit old group gestures?</source>
     <name>Scribe</name>
     <message>
         <source>File not found</source>
-        <translation type="vanished">File non trovato</translation>
+        <translation type="obsolete">File non trovato</translation>
     </message>
     <message>
         <source>Target file doesn&apos;t exists,
 make a new one?</source>
-        <translation type="vanished">Creare il file?</translation>
+        <translation type="obsolete">Creare il file?</translation>
     </message>
     <message>
         <source>File path doesn&apos;t exists</source>
-        <translation type="vanished">Percorso inesistente</translation>
+        <translation type="obsolete">Percorso inesistente</translation>
     </message>
     <message>
         <source>The folder of the file doesn&apos;t exists,
 make a new one?</source>
-        <translation type="vanished">La cartella non esiste,\ncrearla?</translation>
+        <translation type="obsolete">La cartella non esiste,\ncrearla?</translation>
     </message>
     <message>
         <source>Cannot create folder</source>
-        <translation type="vanished">Impossibile creare cartella</translation>
+        <translation type="obsolete">Impossibile creare cartella</translation>
     </message>
     <message>
         <source>Cannot create parent folder.</source>
-        <translation type="vanished">Impossibile creare la catella.</translation>
+        <translation type="obsolete">Impossibile creare la catella.</translation>
     </message>
     <message>
         <source>Cannot open file</source>
-        <translation type="vanished">Impossibile aprire il file</translation>
+        <translation type="obsolete">Impossibile aprire il file</translation>
     </message>
     <message>
         <source>Cannot write file.</source>
-        <translation type="vanished">Impossibile scrivere sul file.</translation>
+        <translation type="obsolete">Impossibile scrivere sul file.</translation>
     </message>
     <message>
         <source>Cannot create the configuration file.</source>
-        <translation type="vanished">Impossibile creare il file di configurazione.</translation>
+        <translation type="obsolete">Impossibile creare il file di configurazione.</translation>
     </message>
     <message>
         <location filename="../scribe.cpp" line="36"/>

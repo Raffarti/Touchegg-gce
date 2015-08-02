@@ -37,7 +37,7 @@ bool Scribe::open(const QString &path){
                                                 tr("File path does not exists, create it?"),QMessageBox::Ok|QMessageBox::Cancel);
             if (result != QMessageBox::Ok)
                 return false;
-            if (!info.dir().mkpath(info.canonicalPath())){
+            if (!info.dir().mkpath(info.path())){
                 QMessageBox::critical(0,tr("File error"),
                                       tr("Cannot create file path."));
                 return false;

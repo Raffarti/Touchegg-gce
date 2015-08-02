@@ -35,8 +35,6 @@ public:
 private:
     QFile *file;
 public slots:
-   // void creationConfirmed(QAbstractButton *button);
-   // void folderCreationConfirmed(QAbstractButton *button);
     void restartTouchegg(QAbstractButton *button);
 };
 

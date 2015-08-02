@@ -86,10 +86,10 @@ QString Gui::getPath(){
     ret.replace(QRegExp("^~"),QDir::homePath());
     //is the path is a directory, adding touchegg.conf as file by default
     if (QFileInfo(ret).isDir()){
-        ret = QFileInfo(ret).canonicalPath().append(QString("/touchegg.conf"));
+        ret = QFileInfo(ret).canonicalFilePath().append("/touchegg.conf");
     }
     if (ret.endsWith("/"))
-        ret.append(QString("/touchegg.conf"));
+        ret.append(QString("touchegg.conf"));
     return ret;
 }
 

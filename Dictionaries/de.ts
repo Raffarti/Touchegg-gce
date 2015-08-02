@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<TS version="2.0" language="de" sourcelanguage="en">
 <context>
     <name>EditDialog</name>
     <message>
@@ -402,41 +402,41 @@ inherit old group gestures?</source>
     <name>Scribe</name>
     <message>
         <source>File not found</source>
-        <translation type="vanished">Datei nicht gefunden</translation>
+        <translation type="obsolete">Datei nicht gefunden</translation>
     </message>
     <message>
         <source>Target file doesn&apos;t exists,
 make a new one?</source>
-        <translation type="vanished">Zieldatei existiert nicht, soll sie angelegt werden?</translation>
+        <translation type="obsolete">Zieldatei existiert nicht, soll sie angelegt werden?</translation>
     </message>
     <message>
         <source>File path doesn&apos;t exists</source>
-        <translation type="vanished">Pfad zur Datei existiert nicht</translation>
+        <translation type="obsolete">Pfad zur Datei existiert nicht</translation>
     </message>
     <message>
         <source>The folder of the file doesn&apos;t exists,
 make a new one?</source>
-        <translation type="vanished">Der Ordner ist nicht vorhanden, soll er angelegt werden?</translation>
+        <translation type="obsolete">Der Ordner ist nicht vorhanden, soll er angelegt werden?</translation>
     </message>
     <message>
         <source>Cannot create folder</source>
-        <translation type="vanished">Ordner kann nicht angelegt werden</translation>
+        <translation type="obsolete">Ordner kann nicht angelegt werden</translation>
     </message>
     <message>
         <source>Cannot create parent folder.</source>
-        <translation type="vanished">Kann Übergeordneten Ordner nicht anlegen.</translation>
+        <translation type="obsolete">Kann Übergeordneten Ordner nicht anlegen.</translation>
     </message>
     <message>
         <source>Cannot open file</source>
-        <translation type="vanished">Datei kann nicht geöffnet werden</translation>
+        <translation type="obsolete">Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Cannot write file.</source>
-        <translation type="vanished">Datei kann icht gespeichert werden.</translation>
+        <translation type="obsolete">Datei kann icht gespeichert werden.</translation>
     </message>
     <message>
         <source>Cannot create the configuration file.</source>
-        <translation type="vanished">Kann die Konfigurationsdatei nicht anlegen.</translation>
+        <translation type="obsolete">Kann die Konfigurationsdatei nicht anlegen.</translation>
     </message>
     <message>
         <location filename="../scribe.cpp" line="36"/>
