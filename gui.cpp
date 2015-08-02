@@ -457,6 +457,12 @@ void Gui::on_saveChooser_clicked()
 {
     QString ret = QFileDialog::getSaveFileName(this,tr("Select Configuration File"),filePath,tr("Configuration Files (*.conf);;All Files (*.*)"));
     if (ret.isNull()) return;
+    if (QFileInfo(ret).exists() &&
+        QMessageBox::Ok != QMessageBox::question(this,
+                                                 tr("File override"),
+                                                 tr("A file with that name already exists, override it?"),
+                                                 QMessageBox::Ok|QMessageBox::Cancel))
+        return;
     filePath = ret;
     ui->filePath->setText(filePath);
     Scribe scribe;

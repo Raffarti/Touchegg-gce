@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de" sourcelanguage="en">
+<TS version="2.1" language="de" sourcelanguage="en">
 <context>
     <name>EditDialog</name>
     <message>
@@ -143,42 +143,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="147"/>
+        <location filename="../gui.cpp" line="148"/>
         <source>Value: </source>
         <translation>Wert:</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="201"/>
+        <location filename="../gui.cpp" line="202"/>
         <source>Action:</source>
         <translation>Aktion:</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="277"/>
+        <location filename="../gui.cpp" line="278"/>
         <source>New group</source>
         <translation>Neue Gruppe</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="278"/>
+        <location filename="../gui.cpp" line="279"/>
         <source>Moving an application to a new group,
 inherit old group gestures?</source>
         <translation>Verschiebe Anwendung in eine neue Gruppe, alte Gruppengesten übertragen?</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="299"/>
-        <location filename="../gui.cpp" line="376"/>
+        <location filename="../gui.cpp" line="300"/>
+        <location filename="../gui.cpp" line="377"/>
         <source>All</source>
         <translation type="unfinished">Alle</translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="451"/>
-        <location filename="../gui.cpp" line="457"/>
+        <location filename="../gui.cpp" line="452"/>
+        <location filename="../gui.cpp" line="458"/>
         <source>Select Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui.cpp" line="451"/>
-        <location filename="../gui.cpp" line="457"/>
+        <location filename="../gui.cpp" line="452"/>
+        <location filename="../gui.cpp" line="458"/>
         <source>Configuration Files (*.conf);;All Files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="462"/>
+        <source>File override</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui.cpp" line="463"/>
+        <source>A file with that name already exists, override it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -391,59 +401,82 @@ inherit old group gestures?</source>
 <context>
     <name>Scribe</name>
     <message>
-        <location filename="../scribe.cpp" line="35"/>
         <source>File not found</source>
-        <translation>Datei nicht gefunden</translation>
+        <translation type="vanished">Datei nicht gefunden</translation>
+    </message>
+    <message>
+        <source>Target file doesn&apos;t exists,
+make a new one?</source>
+        <translation type="vanished">Zieldatei existiert nicht, soll sie angelegt werden?</translation>
+    </message>
+    <message>
+        <source>File path doesn&apos;t exists</source>
+        <translation type="vanished">Pfad zur Datei existiert nicht</translation>
+    </message>
+    <message>
+        <source>The folder of the file doesn&apos;t exists,
+make a new one?</source>
+        <translation type="vanished">Der Ordner ist nicht vorhanden, soll er angelegt werden?</translation>
+    </message>
+    <message>
+        <source>Cannot create folder</source>
+        <translation type="vanished">Ordner kann nicht angelegt werden</translation>
+    </message>
+    <message>
+        <source>Cannot create parent folder.</source>
+        <translation type="vanished">Kann Übergeordneten Ordner nicht anlegen.</translation>
+    </message>
+    <message>
+        <source>Cannot open file</source>
+        <translation type="vanished">Datei kann nicht geöffnet werden</translation>
+    </message>
+    <message>
+        <source>Cannot write file.</source>
+        <translation type="vanished">Datei kann icht gespeichert werden.</translation>
+    </message>
+    <message>
+        <source>Cannot create the configuration file.</source>
+        <translation type="vanished">Kann die Konfigurationsdatei nicht anlegen.</translation>
     </message>
     <message>
         <location filename="../scribe.cpp" line="36"/>
-        <source>Target file doesn&apos;t exists,
-make a new one?</source>
-        <translation>Zieldatei existiert nicht, soll sie angelegt werden?</translation>
+        <location filename="../scribe.cpp" line="41"/>
+        <location filename="../scribe.cpp" line="55"/>
+        <source>File error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scribe.cpp" line="37"/>
+        <source>File path does not exists, create it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scribe.cpp" line="42"/>
+        <source>Cannot create file path.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../scribe.cpp" line="46"/>
-        <source>File path doesn&apos;t exists</source>
-        <translation>Pfad zur Datei existiert nicht</translation>
+        <source>File does not exists</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../scribe.cpp" line="47"/>
-        <source>The folder of the file doesn&apos;t exists,
-make a new one?</source>
-        <translation>Der Ordner ist nicht vorhanden, soll er angelegt werden?</translation>
+        <source>File does not exists, create a new one?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="57"/>
-        <source>Cannot create folder</source>
-        <translation>Ordner kann nicht angelegt werden</translation>
+        <location filename="../scribe.cpp" line="56"/>
+        <source>Cannote write configuration file, check permissions.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="58"/>
-        <source>Cannot create parent folder.</source>
-        <translation>Kann Übergeordneten Ordner nicht anlegen.</translation>
-    </message>
-    <message>
-        <location filename="../scribe.cpp" line="66"/>
-        <source>Cannot open file</source>
-        <translation>Datei kann nicht geöffnet werden</translation>
-    </message>
-    <message>
-        <location filename="../scribe.cpp" line="68"/>
-        <source>Cannot write file.</source>
-        <translation>Datei kann icht gespeichert werden.</translation>
-    </message>
-    <message>
-        <location filename="../scribe.cpp" line="69"/>
-        <source>Cannot create the configuration file.</source>
-        <translation>Kann die Konfigurationsdatei nicht anlegen.</translation>
-    </message>
-    <message>
-        <location filename="../scribe.cpp" line="144"/>
+        <location filename="../scribe.cpp" line="113"/>
         <source>Saving complite</source>
         <translation>Gespeichert</translation>
     </message>
     <message>
-        <location filename="../scribe.cpp" line="145"/>
+        <location filename="../scribe.cpp" line="114"/>
         <source>Confiuration file generated.
 Restart touchegg?</source>
         <translation>Konfigurationsdatei gespeichert. Touchegg neustarten?</translation>

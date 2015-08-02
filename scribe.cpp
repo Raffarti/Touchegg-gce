@@ -28,90 +28,36 @@ Scribe::Scribe(QObject *parent) :
     QObject(parent)
 {
 }
-/*
-bool Scribe::open(QString name, int flag){
-    file = new QFile(name);
-    if (!file->exists() && flag < 1){
-        QMessageBox *conf = new QMessageBox(QMessageBox::Warning,
-                                       QString(tr("File not found")),
-                                       QString(tr("Target file doesn't exists,\nmake a new one?")),
-                                       QMessageBox::Yes|QMessageBox::Cancel);
 
-        QObject::connect(conf,SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(creationConfirmed(QAbstractButton*)));
-        conf->show();
-        return false;
-    }
-    else if (!file->exists()){
-        if (!QFileInfo(*file).absoluteDir().exists() && flag < 2){
-            QMessageBox *conf = new QMessageBox(QMessageBox::Warning,
-                                           QString(tr("File path doesn't exists")),
-                                                QString(tr("The folder of the file doesn't exists,\nmake a new one?")),
-                                           QMessageBox::Yes|QMessageBox::Cancel);
-
-            QObject::connect(conf,SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(folderCreationConfirmed(QAbstractButton*)));
-            conf->show();
-            return false;
-        }
-        QDir("/").mkpath(QFileInfo(*file).absolutePath());
-        if (!QFileInfo(*file).absoluteDir().exists()){
-            QMessageBox *conf = new QMessageBox(QMessageBox::Critical,
-                                           QString(tr("Cannot create folder")),
-                                           QString(tr("Cannot create parent folder.")),
-                                           QMessageBox::Ok);
-
-            conf->show();
-            return false;
-        }
-        if(!file->open(QIODevice::WriteOnly | QIODevice::Text)){
-            QMessageBox *conf = new QMessageBox(QMessageBox::Critical,
-                                           QString(tr("Cannot open file")),
-                                           QString(file->exists()?
-                                                       tr("Cannot write file.")
-                                                       :tr("Cannot create the configuration file.")),
-                                           QMessageBox::Ok);
-            conf->show();
-            return false;
-        }
-    }
-    return true;
-}*/
 bool Scribe::open(const QString &path){
     QFileInfo info(path);
     if (!info.exists()){
         if (!info.dir().exists()){
-            auto result = QMessageBox::question(0,"File error","File path does not exists, create it?",QMessageBox::Ok|QMessageBox::Cancel);
+            auto result = QMessageBox::question(0,tr("File error"),
+                                                tr("File path does not exists, create it?"),QMessageBox::Ok|QMessageBox::Cancel);
             if (result != QMessageBox::Ok)
                 return false;
             if (!info.dir().mkpath(info.canonicalPath())){
-                QMessageBox::critical(0,"File error","Cannot create file path.");
+                QMessageBox::critical(0,tr("File error"),
+                                      tr("Cannot create file path."));
                 return false;
             }
         } else {
-            auto result = QMessageBox::question(0,"File does not exists","File does not exists, create a new one?",QMessageBox::Ok|QMessageBox::Cancel);
+            auto result = QMessageBox::question(0,tr("File does not exists"),
+                                                tr("File does not exists, create a new one?"),
+                                                QMessageBox::Ok|QMessageBox::Cancel);
             if (result != QMessageBox::Ok)
                 return false;
         }
     }
     file = new QFile(path);
     if (!file->open(QIODevice::WriteOnly | QIODevice::Text)){
-        QMessageBox::critical(0,"File error","Cannote write configuration file, check permissions.");
+        QMessageBox::critical(0,tr("File error"),
+                              tr("Cannote write configuration file, check permissions."));
         return false;
     }
     return true;
 }
-/*
-void Scribe::creationConfirmed(QAbstractButton *button){
-    if (button->text() == "&Yes"){
-        open(file->fileName(), 1);
-    }
-}
-
-
-void Scribe::folderCreationConfirmed(QAbstractButton *button){
-    if (button->text() == "&Yes"){
-        open(file->fileName(), 2);
-    }
-}*/
 
 void Scribe::restartTouchegg(QAbstractButton *button){
     if (button->text() == "&Yes"){
@@ -121,7 +67,6 @@ void Scribe::restartTouchegg(QAbstractButton *button){
 }
 
 void Scribe::save(){
-    //file->open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream output(file);
     output.setCodec(QTextCodec::codecForName("UTF8"));
     output << QString::fromUtf8("<touchégg>") << endl;
