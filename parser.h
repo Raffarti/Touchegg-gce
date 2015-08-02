@@ -28,12 +28,6 @@ class Parser{
 
 public:
 
-    struct error{
-        QString msg;
-        QChar ch;
-        int line;
-        int pos;
-    } error;
 
     typedef struct{
         int num;
@@ -50,6 +44,18 @@ public:
     bool loadAll();
 
 private:
+    typedef struct error{
+        error(const QXmlStreamReader &reader, const QString & emsg){
+            pos = reader.columnNumber();
+            line = reader.lineNumber();
+            msg = emsg;
+        }
+
+        QString msg;
+        int line;
+        int pos;
+    } error;
+
     QXmlStreamReader m_reader;
 
     QString appKey;
@@ -57,8 +63,6 @@ private:
     gesture *ges;
 
     QStringList state;
-
-    void throwError(const QString &err);
 
     void sStart();
 
@@ -71,6 +75,8 @@ private:
     void sApplication();
 
     void sGesture();
+
+    error err(const QString &msg);
 
 };
 
