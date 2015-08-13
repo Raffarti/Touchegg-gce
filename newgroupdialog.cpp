@@ -40,10 +40,6 @@ NewGroupDialog::~NewGroupDialog()
 
 void NewGroupDialog::on_NewGroupDialog_accepted()
 {
-}
-
-void NewGroupDialog::buttonBoxAccepted()
-{
     QLineEdit *apps = findChild<QLineEdit*>();
     QComboBox *group = findChild<QComboBox*>("groupCombo");
     QComboBox *target = findChild<QComboBox*>("targetCombo");
@@ -56,6 +52,7 @@ void NewGroupDialog::buttonBoxAccepted()
     else Memory::getGroup(target->currentText())->addApps(apps->text());
     emit done();
 }
+
 
 void NewGroupDialog::on_targetCombo_currentIndexChanged(int index)
 {

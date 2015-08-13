@@ -37,8 +37,6 @@ public:
 private slots:
     void on_NewGroupDialog_accepted();
 
-    void buttonBoxAccepted();
-
     void on_targetCombo_currentIndexChanged(int index);
 
 signals:
