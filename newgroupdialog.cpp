@@ -38,8 +38,9 @@ NewGroupDialog::~NewGroupDialog()
     delete ui;
 }
 
-void NewGroupDialog::on_NewGroupDialog_accepted()
+void NewGroupDialog::accept()
 {
+    QDialog::accept();
     QLineEdit *apps = findChild<QLineEdit*>();
     QComboBox *group = findChild<QComboBox*>("groupCombo");
     QComboBox *target = findChild<QComboBox*>("targetCombo");
