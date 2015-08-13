@@ -38,7 +38,12 @@ NewGroupDialog::~NewGroupDialog()
     delete ui;
 }
 
-void NewGroupDialog::on_NewGroupDialog_accepted()
+void NewGroupDialog::on_buttonBox_rejected()
+{
+    delete this;
+}
+
+void NewGroupDialog::on_buttonBox_accepted()
 {
     QLineEdit *apps = findChild<QLineEdit*>();
     QComboBox *group = findChild<QComboBox*>("groupCombo");
@@ -52,7 +57,6 @@ void NewGroupDialog::on_NewGroupDialog_accepted()
     else Memory::getGroup(target->currentText())->addApps(apps->text());
     emit done();
 }
-
 
 void NewGroupDialog::on_targetCombo_currentIndexChanged(int index)
 {
