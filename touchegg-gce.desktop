@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Categories=Settings
+Categories=Settings;
 TryExec=touchegg-gce
 Exec=touchegg-gce
 Name=Touchégg-GCE
