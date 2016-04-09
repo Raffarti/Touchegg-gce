@@ -22,7 +22,7 @@ Build and install in /usr/local (default prefix):
 Build and install in user's home:
 
     mkdir build && cd build
-    qmake PREFIX=~/.local
+    qmake PREFIX=~/.local ..
     make && make install
 
 
